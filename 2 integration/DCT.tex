@@ -1,0 +1,182 @@
+\section{控制收敛定理的应用}\label{DCT}
+
+\subsection{函数族的控制收敛定理}
+我们往往将函数列视作一个一个函数的枚举: $f_1, f_2, \cdots, f_n, \cdots$, 其中每个$f_j: \R^d \to \R$. 若$x \in \R^d$, 则可得到数列$f_1(x), f_2(x), \cdots, f_n(x), \cdots$. 如果把函数列的指标$j$也视作一个变量, 那么我们可以得到新的函数$f: \R^d \times \N \to \R$, 原函数列便可以写成
+$$f(x,1), f(x,2), \cdots, f(x,n), \cdots. $$
+控制收敛定理(以及其他收敛定理)解决的正是形如$f$的函数的积分与极限运算交换次序的问题. 但是在应用中, 我们常常会碰到定义成积分形式的函数——是时候见见\textbf{Fourier变换}了!
+\begin{definition}
+    若$f \in L^1(\R^d)$, 定义$f$的Fourier变换为函数
+    \begin{align*}
+    &\hat{f}: \R^d \to \R \\
+    &\hat{f}(\xi) = \intRd f(x)e^{-2\pi ix \cdot \xi} dx,
+    \end{align*}
+    其中$x \in \R^d, \xi \in \R^d$, $x \cdot \xi = x_1\xi_1 + \cdots + x_d\xi_d$.
+\end{definition}
+\begin{remark}
+    Fourier变换是$L^1(\R^d)$到另一个函数空间$C_0(\R^d)$\footnote{我们在后面会说明$C_0(\R^d)$是怎么来的, 这里大家只需知道Fourier变换是从一个函数空间$L^1(\R^d)$到另一个函数空间的映射即可. 函数空间在这里理解成一些函数构成的集合即可. }
+    的映射, 常常记作$\calF: L^1(\R^d) \to C_0(\R^d)$. ``$f$的Fourier变换"则是指$f$在映射$\calF$下的像: $\calF(f)$, 一般也写作$\hat{f}$. 但是光秃秃的一个$\calF(f)$提供不了任何信息(告诉不了我们这个函数的对应法则), 所以要通过表达式定义它: $\calF(f)$是一个对应关系, 它将$\xi \in \R^d$对应到
+    $\intRd f(x)e^{-2\pi ix \cdot \xi} dx$, 写成
+    $$\calF(f)(\xi) = \intRd f(x)e^{-2\pi ix \cdot \xi} dx.$$ 第一个括号一般可以省略, 就有了下面这种最常见的写法:
+    $$\calF f(\xi) = \intRd f(x)e^{-2\pi ix \cdot \xi} dx.$$
+\end{remark}
+\begin{exercise}
+    计算: $\calF f(0)=?$\footnote{这题就让大家熟悉一下记号}
+\end{exercise}
+\begin{exercise}
+    证明对所有$\xi \in \R^d$, 都有$|\hat{f}(\xi)|<\infty$, 即$\hat{f}$是良定义的.
+\end{exercise}
+接下来, 我们利用控制收敛定理研究$\hat{f}$的连续性:
+\begin{example}[~($\hat{f} \in C(\R^d)$)]
+    设$f \in L^1(\R^d)$, 则$\hat{f}$在$\R^d$上连续.
+\end{example}
+\begin{proof}
+    根据函数连续性的定义, 我们需要估计$|\hat{f}(\xi+h) - \hat{f}(\xi)|$.
+    \begin{align*}
+    |\hat{f}(\xi+h)-\hat{f}(\xi)|
+    &= \left|\intRd f(x)e^{-2\pi ix \xi}(e^{-2\pi ixh}-1) dx \right|  \\
+    &\leq \intRd |f(x)||e^{-2\pi ixh}-1| dx.
+    \end{align*}
+    现只需证明当$h \to 0$时, 上面的积分也趋于$0$. 这就是一个交换积分与极限次序的问题.
+    现在我们有
+    \begin{enumerate}
+        \item $f(x)(e^{-2\pi ixh}-1) \to 0 (h \to 0)$,
+        \item $|f(x)(e^{-2\pi ixh}-1)| \leq 2|f(x)| \in L^1(\R^d)$,
+    \end{enumerate}
+    与控制收敛定理的条件唯一的区别就是$h>0$和$n \in \N$. 回想我们之前常用的``将连续型极限转化为离散型极限"的方法(序列连续性或Heine定理), 只需证明$|\hat{f}(\xi+h_n)-\hat{f}(\xi)| \to 0$对所有收敛至$0$的数列$\{h_n: n \in \N\}$都成立. 现任取一个满足条件的数列$\{h_n\}$, 根据控制收敛定理得
+    $$\lim_{n \to \infty}\intRd |f(x)||\FourierBase{xh_n}-1| dx
+    = \intRd \lim_{n \to \infty}|f(x)||\FourierBase{xh_n}-1| dx = 0. $$
+    这就证明了$|\hat{f}(\xi+h) - \hat{f}(\xi)| \to 0 ~(h \to 0)$.
+\end{proof}
+\begin{remark}
+    我们隐隐约约感觉到控制收敛定理不仅对某些函数列$f: \R^d \times \N \to \R$适用, 也对某些具有连续指标的函数族$f: \R^d \times [a, b] \to \R$适用! 其实, 教科书一般是这样写证明的:
+    由控制收敛定理可得
+    $$|\hat{f}(\xi+h)-\hat{f}(\xi)|
+    = \left|\intRd f(x)e^{-2\pi ix \xi}(e^{-2\pi ixh}-1) dx \right|  
+    \leq \intRd |f(x)||e^{-2\pi ixh}-1| dx \to 0 \quad (h \to 0).$$
+\end{remark}
+实际上, 将函数的序列连续性和(函数列的)控制收敛定理结合可以很快得到``函数族的控制收敛定理":
+\begin{exercise} \label{switch_lim_int}
+    设$f:\R^d \times [a,b] \to \R ~(-\infty<a<b<\infty)$, 对每个$t$, 有
+    $\intRd |f(x,t)|dx < \infty~$(函数族中的每个函数都可积). 令$F(t)=\intRd f(x,t)dx$,
+    若存在$g \in L^1(\R^d)$使$|f(x,t)| \leq |g(x)|$对所有$x,t$都成立, 且对每个$x$有$\lim_{t\to t_0}f(x,t)=f(x,t_0)$, 则
+    $$\lim_{t\to t_0} \intRd f(x,t)dx = \intRd \lim_{t\to t_0} f(x,t)dx = \intRd f(x,t_0)dx$$
+\end{exercise}
+\begin{problem}
+    该结论和数学分析含参量积分中的对应结论有哪些区别? 
+\end{problem}
+在实际使用中, 可以直接使用函数族的控制收敛定理, 不需要特别强调(因为教科书也是这么干的). 
+\subsection{``一键换序"定理}
+人类有两大欲望:
+\begin{enumerate}
+    \item 交换极限和积分次序;
+    \item 交换求导和积分次序.
+\end{enumerate}
+``分析性质"是个很笼统的说法, 包含连续性, 可微性, 可积性等等. 本小节我们主要探究由积分定义的函数的连续性与可微性. 
+假设$f: \R^2 \to \R$且$f \in C^1$, 通过积分的形式可以定义函数
+$F(x) = \int_{\R^2} f(x,y)dy$. 我们想问: $f$还需满足哪些条件, 才能使$F$连续; $F$可微? 这实际上就是在问何时能有
+\begin{enumerate}
+{\everymath{\displaystyle}
+    \item $\lim_{h \to 0} \int f(x+h,y)-f(x,y) dy = \int \lim_{h \to 0} (f(x+h,y)-f(x,y)) dy$,
+    \item $\lim_{h \to 0} \frac{F(x+h)-F(x)}{h} = \int \lim_{h \to 0} \frac{f(x+h,y)-f(x,y)}{h} dy$, 即
+    $$\frac{dF}{dx}(x) = \int \pdv{}{x}f(x,y) dy.$$
+}
+\end{enumerate}
+根据上一节的``函数族的控制收敛定理"内容知第一条的答案, 现在我们研究交换求导与积分次序的条件.
+我们先从$[0,1] \times [0,1]$上的$C^1$函数$f$出发推导, 看看哪一步会出问题.
+令$F(t) = \int_0^1 f(x,t)dx$, 需要估计如下极限:
+$$\lim_{h \to 0}\int_0^1 \frac{f(x,t+h)-f(x,t)}{h}dt.$$
+固定住$x$, 对每个$t$, 有$\lim_{h \to 0}[f(x,t+h)-f(x,t)]/h = 
+{\pdv*{f}{x}} (x,t)$. 
+设$\eps>0$, 则存在$\d$使得对所有
+$0<|h|<\d$都有
+$$\left|\frac{f(x,t+h)-f(x,t)}{h} - \pdv{}{x}f(x,t)\right| < \eps,$$
+对$t$积分, 得
+$$\int_0^1 \left|\frac{f(x,t+h)-f(x,t)}{h} - \pdv{}{x}f(x,t)\right| dt < \eps.$$
+在继续阅读之前, 请停下思考:
+\begin{exercise}
+    上述过程哪里有问题?
+\end{exercise}
+求导本身就是一种极限过程, 所以交换求导与积分次序的问题和交换极限与积分次序的问题并无本质区别. 通过下面的例题我们发现, 换序的条件非常宽松\footnote{这就是为什么在大部分情况下稀里糊涂换序不会产生错误}: 只需要偏导数存在且可积. 证明的思路跟先前完全一样, 如果读者不会做练习\ref{switch_lim_int}的话, 可参考本例中的证明. 
+\begin{example}
+    设$f:\R^d \times [a,b] \to \R ~(-\infty<a<b<\infty)$, 对每个$t$, 有
+    $\intRd |f(x,t)|dx < \infty~$(函数族中的每个函数都可积). 令$F(t)=\intRd f(x,t)dx$.
+    若$\pdv*{f}{t}$存在而且被$g \in L^1(\R^d)$控制住, 即存在$g \in L^1(\R^d)$, 使
+    $$\left|{\pdv{f}{t}}(x,t) \right| \leq g(x) ~\forall x,t.$$
+    那么, $F$可微且
+    $$F'(x)=\intRd {\pdv{f}{t}}(x,t) dx.$$
+\end{example}
+\begin{proof}
+    考虑差商
+    $$\frac{F(t+h)-F(t)}{h} = \intRd \frac{f(x,t+h)-f(x,t)}{h}
+      dx. $$
+    设$\{h_n\}$是任一趋于$0$的数列, 令
+    $$g_n(x)=\frac{f(x, t+h_n)-f(x,t)}{h_n},$$
+    则$g_n(x) \to {\pdv{f}{t}}(x,t)$. 现在需要控制住$g_n$. 由微分中值定理, 
+    $$|g_n(x)|=\left|{\pdv{f}{t}}(x, t+\theta h_n)h_n \cdot \frac{1}{h_n}\right| \leq g(x) \in L^1(\R^d),$$
+    所以由控制收敛定理得
+    $$\int g_n(x)dx \to \int g(x)dx \quad (n \to \infty).$$
+    即
+    $$F'(t)=\lim_{n \to \infty}\frac{F(t+h_n)-F(t)}{h_n}=
+    \lim_{n \to \infty}\int g_n(x)dx = \int {\pdv{f}{t}}(x,t)dx. $$
+\end{proof}
+我们把这两个重要结论整理成定理\footnote{参见Real Analysis, Folland, 2.27}.
+\begin{theorem}[一键换序]
+    设$f:\R^d \times [a,b] \to \R ~(-\infty<a<b<\infty)$, 对每个$t$, 有
+    $\intRd |f(x,t)|dx < \infty~$(函数族中的每个函数都可积). 令$F(t)=\intRd f(x,t)dx$.
+    \begin{enumerate}
+    \item 若存在$g \in L^1(\R^d)$使$|f(x,t)| \leq |g(x)|$对所有$x,t$都成立, 且对每个$x$有$\lim_{t\to t_0}f(x,t)=f(x,t_0)$, 则
+    $$\lim_{t\to t_0} \intRd f(x,t)dx = \intRd \lim_{t\to t_0} f(x,t)dx = \intRd f(x,t_0)dx$$
+    \item 若$\pdv*{f}{t}$存在而且被$g \in L^1(\R^d)$控制住, 即存在$g \in L^1(\R^d)$, 使
+    $$\left|{\pdv{f}{t}}(x,t) \right| \leq g(x) ~\forall x,t.$$
+    那么, $F$可微且
+    $$F'(x)=\intRd {\pdv{f}{t}}(x,t) dx.$$
+    \end{enumerate}
+\end{theorem}
+现在, 来体会一下一键换序的爽快感吧!
+\begin{exercise}
+    设$f \in C^1(\R)$(即$f$连续可微). 证明
+    $$\intRd (-2\pi ix)f(x)\FourierBase{x\xi} dx 
+      = \frac{d}{d\xi}\hat{f}(\xi). $$
+    这是Fourier变换的一条重要性质, 它联系了多项式乘法与微分这两个运算. 
+    上式的口语化描述为``$(-2\pi ix)f(x)$的Fourier变换是$\frac{d}{d\xi}\hat{f}(\xi)$".
+\end{exercise}
+
+\subsection{综合练习}
+考试特别喜欢出用控制收敛定理证明函数连续性, 可微性等等分析性质的题, 而这些函数往往以积分的形式给出. 
+%接下来的练习\footnote{均来自UW-Madison博士资格考试}我会给出关键步骤, 并把细节作为习题, 供大家动笔实践. 
+
+\begin{exercise} %(UW-Madison PhD Qual Spring 2017)
+    设$f:[0,\infty) \to \R$连续可微， 且$\sup_{x \geq 0}|f'(x)|<\infty$. 对$x>0$定义
+    $$F(x) = \int_0^\infty f(x+yx)\psi(y)dy,$$
+    其中$\psi$满足
+    $$\int_0^\infty |\psi(y)|dy < \infty, \quad \int_0^\infty y|\psi(y)|dy < \infty.$$    
+    证明$F(x)$在$[0,\infty)$上是良定义的(即$F(x)<\infty$), 且$F$连续可微.
+\end{exercise}
+
+%\begin{exercise}% UW-Madison Qual
+    %设$f: \R \to \R$具有紧支集, 且存在常数$A<\infty$, 使
+    %$\forall x, y \in \mathbb{R}$ : $|f(x)-f(y)| \leq A|x-y|^\beta$.\footnote{该条件称作指数为$\b$的H\"older条件} \\
+    %定义函数
+    %$$
+    %g(x)=\int_{-\infty}^{\infty} \frac{f(y)}{|x-y|^\alpha} dy,
+    %$$
+    %其中 $\alpha \in(0, \beta)$.
+    %\begin{enumerate}
+    %\item 证明$g$在$0$处连续.
+    %\item 证明$g$在$0$处可微.
+    %\end{enumerate}
+%\end{exercise}
+
+\begin{exercise}
+定义
+$$F(x)=\int_0^{\infty} \frac{e^{-t}}{\log t}\left(t^{x-1}-1\right)dt.$$
+\begin{enumerate}
+    \item 被积函数$\frac{e^{-t}}{\log t}\left(t^{x-1}-1\right)dt$对哪些$x \in \R$是Lebesgue可积的?
+    \item 证明$F$在$\R^+$连续.
+    \item 证明$F$在$\R^+$可微, 且其导数为
+    $$F'(x)=\int_0^{\infty} e^{-t} t^{x-1} dt.$$
+\end{enumerate}
+\end{exercise}
+
+%\subsection{积分与测度的联系}
+%绝对连续性

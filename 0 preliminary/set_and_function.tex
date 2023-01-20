@@ -1,0 +1,274 @@
+\section{集合与映射}
+\subsection{逻辑联结词与集合运算}
+逻辑联结词(且, 或, 非)与集合运算(交, 并, 补)有着天然的联系. 我们先复习几个最最基本的等价结论:
+\begin{enumerate}
+    \item $x \in A \cap B \Longleftrightarrow x\in A$且$x \in B$. 
+    \item $x \in A \cup B \Longleftrightarrow x\in A$或$x \in B$.
+    \item $x \in A^c \Longleftrightarrow x \notin A$. 
+\end{enumerate}
+
+接下来, 我们回顾一下“指标”的概念. 在数学分析中, 我们学习的数列通常写成$\{a_n: n \in \N\}$, 这里的$\N$便是一个指标集(index set). 通俗地讲, 这个数列的下标都是从$\N$里抓出来的. 我们当然可以把$\N$换成其他集合, 例如正偶数集$2\N$, 则得到原数列的偶子列$\{a_n: n \in 2\N\}$. 指标集不一定可数, 
+如$\R^n$中的以$0$为球心, $r$为半径的球组成的集合族$\{B(0,r): 0<r<1\}$的指标集就是$(0,1)$这个开区间. 大多数情况下, 指标集就是$\R$的一个子集. 更一般地, 我们有如下定义:
+
+设$\calI$是一个指标集. 则
+\begin{enumerate}
+    \item $x\in \bigcap_{i\in \calI}A_i \iff \forall i \in \calI: x \in A_i $.
+    \item $x\in \bigcup_{i\in \calI}A_i \iff \exists i_0 \in \calI: x \in A_{i_0} $.
+\end{enumerate}
+% 加几个简单的例子
+% equicontinuous
+\begin{example}
+    证明$\bigintersect{n=1}{\infty}[0, 1+1/n)=[0,1]$.
+\end{example}
+\begin{proof}
+    设$x \in \bigintersect{n=1}{\infty}[0, 1+1/n)$, 则$\forall n \in \N: x \in [0, 1+1/n)$,
+    即$0\leq x < 1+1/n$对所有$n \in \N$都成立, 所以$0\leq x \leq 1$. 
+    反过来, 令$x \in [0,1]$, 则$0 \leq x < 1+1/n$对所有$n \in \N$都成立, 翻译成集合运算得
+    $x \in \bigintersect{n=1}{\infty}[0, 1+1/n)$.
+\end{proof}
+\begin{remark}
+    这题本质上是“an epsilon of room”的小应用.(见\ref{epsilon_room})
+\end{remark}
+\begin{exercise}
+    计算$\bigunion{n=1}{\infty}[0, 1-1/n]$.
+\end{exercise}
+
+
+接下来, 我们试着用集合语言描述函数列的收敛点集:
+\begin{example}
+设$f_n: \R \to \R$是一列函数, 写出$\{f_n\}$的收敛点集.
+\end{example}
+\begin{solution}
+    记我们的目标集合(即收敛点集)为$C$. 
+    首先明晰概念: 对每个固定的$x \in \R$, $\{f_n(x): n \in \N\}$就是一个数列, 要么收敛要么发散. 如果收敛, 那就把这个$x$扔进$C$; 如果发散, 这个点就不要了. 这样把$\R$中点每个点$x$检查过一遍后, 就可得到收敛点集. 
+    因此, 我们必须使用数列收敛这一概念. 相信大家都能看出“$x$是$\{f_n\}$的一个收敛点”与“$\{f_n(x)\}$收敛”这两个命题是等价的. \\
+    为了叙述方便, 我们不妨将收敛的$\{f_n(x)\}$的极限记为$f(x)$($f$是一个定义在$C$上的函数). $f_n(x_0) \to f(x_0)$的$\eps-N$定义为
+    $$\forall \eps>0~ \exists N \in \N~ \forall n \geq N: |f_n(x_0)-f(x_0)| < \eps,$$
+    也即
+    $$\forall \eps>0~ \exists N \in \N~ \forall n \geq N:
+    x_0 \in \{x \in \R: |f_n(x)-f(x)| < \eps\}.$$
+    将逻辑联结词翻译为集合运算, 得
+    $$x_0 \in \bigcap_{\eps>0}\bigcup_{N\in \N}\bigcap_{n\geq N}\{x \in \R: |f_n(x)-f(x)| < \eps\}.$$
+    然而, 在实分析中, 我们只能处理可数并或者可数交, 
+    “$\bigcap_{\eps>0}$”在这里没有实用价值, 所以我们要使出最后一招: 离散化. $f_n(x_0) \to f(x_0)$的另一个等价表述为
+    $$\forall k\in \N~ \exists N \in \N~ \forall n \geq N: |f_n(x_0)-f(x_0)| < \frac{1}{k},$$
+    这样就有
+    $$x_0 \in \bigcap_{k=1}^\infty \bigcup_{N=1}^\infty \bigcap_{n=N}^\infty 
+    \left\{x \in \R: |f_n(x)-f(x)| < \frac{1}{k}\right\} := C.$$
+    最后检验一下: 若$x \in C$, 则$\forall \eps>0~ \exists N \in \N~ \forall n \geq N: |f_n(x)-f(x)| < \frac{1}{k}$, 
+    即$f_n(x) \to f(x)$. 
+    若$x$是$\{f_n\}$的收敛点, 则显然有$x \in C$. 因此, $\{f_n\}$的收敛点集为
+    $$ C=\bigcap_{k=1}^\infty \bigcup_{N=1}^\infty \bigcap_{n=N}^\infty 
+    \left\{x \in \R: |f_n(x)-f(x)| < \frac{1}{k}\right\}. $$
+\end{solution}
+\begin{remark}
+    “离散化”这一方法来源于数列收敛性的一个等价描述: 若$a_n \to a (n \to \infty)$, 则
+    对每个$k \in \N$都存在一个足够大的$N_k$(依赖于$k$)使得当$n>N_k$时, $|a_n-a|<1/k$.
+\end{remark}
+\begin{exercise}
+    请分别沿着两条线索写出$\{f_n: n \in \N\}$的发散点集(记为$D$):
+    \begin{enumerate}
+    \item $\{f_n(x): n \in \N\}$要么发散, 要么收敛, 没有第三种情况.
+    \item “$\forall \eps>0~ \exists N \in \N~ \forall n \geq N: |f_n(x_0)-f(x_0)| < \eps$”的否命题是什么?
+    \end{enumerate}
+\end{exercise}
+
+\subsection{集合列的极限}
+在描述函数列的收敛点集时, 我们得到了``交并交"的形式. 
+我们先从单调集合列的极限讲起.
+\subsubsection*{单调集合列}
+要想把数列的极限这一定义移植到集合列身上, 自然绕不开集合的运算. 我们在上一节证明了两个等式: 
+$$\bCap{n=1}{\infty}[0, 1+1/n) = [0, 1], \quad 
+  \bCup{n=1}{\infty}[0, 1-1/n] = [0, 1). $$
+这两列集合都有``一个套一个"的特点:
+$$[0, 1+1/1) \supset [0, 1+1/2) \supset \cdots, \quad  
+[0, 1-1/1] \subset [0, 1-1/2] \subset \cdots. $$
+似乎把上面两个等式写成
+$$\lim_{n \to \infty}[0, 1+1/n) = [0, 1], \quad 
+  \lim_{n \to \infty}[0, 1-1/n] = [0, 1) $$
+也没有什么问题. 现给出定义: 如果集合列$\{X_n\}$满足$X_1 \subset X_2 \subset \cdots$, 那么称$\{X_n\}$\textbf{递增}, 并集$\bCup{n=1}{\infty}X_n$为该集合列的\textbf{极限(集)}, 记作
+$$\lim_{n \to \infty}X_n = \bCup{n=1}{\infty}X_n. $$
+如果集合列$\{X_n\}$满足$X_1 \supset X_2 \supset \cdots$, 那么称$\{X_n\}$\textbf{递减}, 交集$\bCap{n=1}{\infty}X_n$为该集合列的\textbf{极限(集)}, 记作
+$$\lim_{n \to \infty}X_n = \bCap{n=1}{\infty}X_n. $$
+\begin{example}
+    若$A_n = [n, \infty)$, 则$\lim_{n \to \infty}A_n = \varnothing$.
+\end{example}
+\begin{proof}
+    $A_n$的极限就是$\bCap{n=1}{\infty}[n, \infty)$. 假如该集合非空, 则可设$x \in \bCap{n=1}{\infty}[n, \infty)$, 则$n \leq x < \infty$对所有正整数$n$都成立, 从而$x=\infty$, 矛盾. 所以$\lim_{n \to \infty}A_n \subset \varnothing$. 由于空集是任何集合的子集, 另一个方向自然成立. \qed 
+\end{proof}
+\begin{example}
+    设$\{f_n\}_{n=1}^\infty$为$\R$上单调递增的实值函数列, $\lim_{n \to \infty}f_n(x) = f(x)$. 设$t \in \R$, 令
+    $$E_n = \{x : f_n(x) > t\} \quad (n \in \N^+),$$
+    则有$E_1 \subset E_2 \subset \cdots$, 从而
+    $$\lim_{n \to \infty}E_n = \bCup{n=1}{\infty}\{x: f_n(x) > t\} = \{x : f(x)>t\}, $$
+    即$$\lim_{n \to \infty}\{x: f_n(x) > t\} = \{x : f(x)>t\}.$$
+\end{example}
+
+
+\subsubsection*{一般集合列的上下极限}
+对于一般的集合列, 我们可定义其上极限与下极限. 
+设$\{A_n: n \in \N\}$是一列集合, 定义
+\begin{enumerate}
+    \item $\{A_n: n \in \N\}$的上极限集为
+    $$\limsup_{n\to \infty}A_n = \bigintersect{n=1}{\infty}\bigunion{k=n}{\infty}A_k;$$
+    \item $\{A_n: n \in \N\}$的下极限集为
+    $$\liminf_{n\to \infty}A_n = \bigunion{n=1}{\infty}\bigintersect{k=n}{\infty}A_k.$$
+\end{enumerate}
+\begin{remark}
+    有时可省略“$n\to \infty$”, 直接写成$\limsup A_n, \liminf A_n$.
+\end{remark}
+我们同样可以将集合运算翻译成逻辑联结词, 来对这两种集合有个直观认识. 
+若$x \in \bigintersect{n=1}{\infty}\bigunion{k=n}{\infty}A_k$, 从外到内剥开, 先把$\bigunion{k=n}{\infty}A_k$看作一个整体, 有$\forall n \in \N^+: x \in \bigunion{k=n}{\infty}A_k$. 再翻译后半部分, 得$$\forall n \in \N^+ ~\exists k \geq n: x \in A_k.$$
+也就是说: 对$n=1$, 可以找到下标$k_1$使$x \in A_{k_1}$, 对$n=2$, 可以找到下标$k_2$使$x \in A_{k_2}$,
+对$n=3$, 可以找到下标$k_3$使$x \in A_{k_3}$, ...... \\
+现令$x \in \liminf_{n\to \infty}A_n = \bigunion{n=1}{\infty}\bigintersect{k=n}{\infty}A_k$, 则
+存在正整数$n_0$使得$x \in A_k$对所有$k\geq n_0$都成立. 也即从某项$n_0$开始, $x \in \bigintersect{k=n_0}{\infty}A_k$. 最后, 我们用下极限集描述$\{f_n(x): n \in \N\}$的收敛性:
+$f_n(x_0) \to f(x_0) (n \to \infty)$ 当且仅当对每个$\eps>0$, 
+$x_0 \in \liminf_{n\to \infty}\{x \in \R: |f_n(x)-f(x)| < \eps\}$.
+\begin{exercise}
+    用上极限集描述$\{f_n:n \in \N\}$的发散点集.
+\end{exercise}
+
+\subsubsection*{上下极限集的口语化定义}
+不少书籍会提到上下极限集的另一种等价表述(甚至是直接用作定义). 由于该表述十分拗口, 必须给出英文原文.
+\begin{example}
+    验证:
+    \begin{align*}
+    &\limsup E_n = \{x: x\in E_n \mathrm{~for~infinitely~many~}n\}
+    = \{x: x \in E_n \text{ 对无穷多个}n\text{成立} \}. \\
+    &\liminf E_n = \{x: x\in E_n \mathrm{~for~all~but~finitely~many~}n\}
+    = \{x: x \in E_n \text{ 对除有限个之外的所有}n\text{成立} \}. \\
+    \end{align*}
+\end{example}
+\begin{proof}
+    先学一点语法: “but”的作用相当于集合的差运算, “for all but”的意思是某个命题对除去but后面的部分, 其余部分都成立. 
+    \begin{enumerate}
+    \item 根据上节内容可以很快得出$\limsup E_n \subset \{x: x\in E_n \mathrm{~for~infinitely~many~}n\}$. 先回顾实数中正无穷的定义: 如果$y\geq N$对每个正整数$N$都成立, 那么$y=\infty$. 若$x$属于无穷多个$E_n$, 则对每个$n \in \N$, 都存在$k \geq n$使$x \in E_k$(否则会怎样?). 所以$\{x: x\in E_n \mathrm{~for~infinitely~many~}n\} \subset \limsup E_n$. 
+    \item 根据上节内容可得.
+    \end{enumerate}
+\end{proof}
+\begin{remark}
+    “$x \in E_n$对除有限个之外的$n$都成立”能够推出“$x$属于无穷多个$E_n$”, 但是反之不成立(间隔着取$n$). 从这点我们可得包含关系:
+    $$ \liminf E_n \subset \limsup E_n, $$
+    正好和数列上下极限的天然不等式
+    $\liminf a_n \leq \limsup a_n$ 对应上了. 
+    
+    在概率论中, 上极限集也被记作
+    $$\limsup E_n = \{x: x\in E_n \mathrm{~infinitely~often}\}=\{x: x\in E_n \mathrm{~i.o.}\}.$$
+\end{remark}
+\begin{exercise}
+    设数列$a_n \to a (n \to \infty)$, 则
+    $$\bCap{k=1}{\infty}\bCup{m=1}{\infty}\bCap{n=m}{\infty}
+    \br{a_n - \frac{1}{k}, a_n + \frac{1}{k}} = \{a\}. $$
+\end{exercise}
+\begin{proof}
+    提示: $a_n \to a$当且仅当
+    $$\forall k \in \N^+ ~\exists m \in \N^+ ~\forall n \geq m: 
+    |a_n - a| < \frac{1}{k}, $$
+    即
+    $$\forall k \in \N^+ ~\exists m \in \N^+ ~\forall n \geq m: 
+    a \in \br{a_n - \frac{1}{k}, a_n + \frac{1}{k}}.$$
+\end{proof}
+\begin{exercise}
+    设有集合列$\{A_n\}, \{B_n\}$, 证明:
+    \begin{enumerate}
+    \item $\limsup (A_n \cup B_n) = \limsup A_n \cup \limsup B_n$;
+    \item $\liminf (A_n \cap B_n) = \liminf A_n \cap \liminf B_n$.
+    \end{enumerate}
+\end{exercise}
+\begin{proof}
+    令$A_n \cup B_n = C_n$, 则
+    \begin{align*}
+    \limsup C_n
+    &= \bCap{n=1}{\infty}\bigcup_{k=n}^{\infty} C_n \\
+    &= \bCap{n=1}{\infty}\bigcup_{k=n}^{\infty} (A_n \cup B_n) \\
+    &=\bCap{n=1}{\infty} \br{\bigcup_{k=n}^{\infty} A_n \cup \bigcup_{k=n}^{\infty} B_n} \\
+    &= \br{\bCap{n=1}{\infty}\bigcup_{k=n}^{\infty} A_n} \cup 
+       \br{\bCap{n=1}{\infty}\bigcup_{k=n}^{\infty} B_n} \\
+    &= \limsup A_n \cup \limsup B_n.
+    \end{align*}
+    第二条请大家自己动手. \qed 
+\end{proof}
+
+\subsection{映射的性质}
+本节内容大家在数学分析中早已熟练掌握, 所以写得比较随性.
+\subsubsection*{常用定义}
+集合与映射是现代数学的基石, 没有这两个概念, 我们就几乎无法描述任何数学对象. 设$X, Y$是两个非空集合, 若对$X$中的每个元素$x$, 依照\textbf{对应法则}$f$, 恒有唯一的$y \in Y$与之对应, 则称此对应法则为一个$X$到$Y$的\textbf{映射}. 映射的记号通常分为两部分--集合的对应与元素的对应, 例如:
+\begin{align*}
+    f:X &\to Y    \\
+    x &\mapsto y, 
+\end{align*}
+也常记为
+\begin{align*}
+    f:X &\to Y    \\
+    x &\mapsto f(x). 
+\end{align*}
+$y$称为$x$在$f$下的\textbf{像}(image), $x$称为$y$的一个\textbf{原像}(preimage), $f(X) = \{f(x): x\in X\}$称为$f$的\textbf{值域}(range), $X$称为$f$的\textbf{定义域}(domain).  
+\textbf{对应法则}(rule of assignment)到底是什么? 这里我们不深究过于底层的数学概念, 感兴趣的同学可以阅读Munkres的拓扑学的第2节``Functions", 他用集合的语言严格定义了这一名词. 我们只需要理解到``把$x$对应到$f(x)$"这一层即可. \\
+\begin{remark}
+    从现在开始, 本讲义将\textbf{映射}(map, mapping)与\textbf{函数}(function)当作同义词使用, 这样会方便我们以后描述一些概念. \sout{Function这个词里也没有number嘛.}
+\end{remark}
+现在我们来看两个描述映射的形容词: \textbf{单射}(injective)与\textbf{满射}(surjective).
+\textit{ject}有投, 扔(throw)之意, \textit{in-}表示``向里面", \textit{sur-}有``在$\cdots$之上"的含义. 设$f:X \to Y$是一个映射. 如果$f(x)=f(x') \implies x=x'$, 那么称$f$为单射(不能有两个不同的元素对应到同一元素); 如果每个$y \in Y$都存在$x \in X$, 使得$f(x) = y$, 则称$f$为满射. 如果$f$既是单射又是满射, 就称$f$为双射(bijection), 也叫一一对应(one-to-one correspondence). 单射与``一一"是同义词(injective = one-to-one), 
+满射与``到上"\footnote{这个奇怪的词我们永远不会用}(surjective = onto)是同义词. 
+
+\subsubsection*{复合映射, 原像集与逆映射}
+接下来是两个容易混淆的概念: 原像集与逆映射. 设$f:X \to Y, B \subset Y$.
+$B$的\textbf{原像集}定义为$$f^{-1}(B) = \{x \in X: f(x) \in B\},$$
+顾名思义, 就是$B$中的元素的原像构成的集合. 注意, $B$中有些元素可能不在$f$的值域中, 但仔细阅读定义就会发现这无所谓. 如果$B$是个单点集$\{y\}$, 那么$f^{-1}(\{y\}) = \{x \in X: f(x) = y\}$.
+
+设$g:X \to Y, f:Y \to Z$, 我们可以由此定义一个从$X$到$Z$的映射. 首先思考一个问题: 
+我们通过何种方式刻画映射这一对应法则? 利用值域. 映射$f$完全由$\range~ f = \{f(x): x \in X\}$所决定, 所以要定义某种新的映射$f \circ g$, 我们只需要对每个$x \in X$, 定义$(f \circ g)(x)$即可. 现定义$f$和$g$的\textbf{复合映射}(composite map)为
+\begin{align*}
+    f \circ g: X &\to Z \\
+    (f \circ g)(x) &= f(g(x)).
+\end{align*}
+用交换图会更清楚些:
+\begin{center}
+    \begin{tikzcd}
+    X \arrow[rd, "f \circ g"] \arrow[r, "g"] 
+    & Y \arrow[d, "f"] \\
+    & Z
+    \end{tikzcd}
+\end{center}
+
+有了复合函数的定义, 我们可以引入\textbf{可逆映射}(invertible map)这一概念. 记从$X$到$Y$的\textbf{恒等映射}(identity map)为$\id_X, \id_X(x) = x$.  设$f:X \to Y$, 若存在$g: Y \to X$, 使得$f \circ g = \id_X$且$g \circ f = \id_Y$, 那么称$f$\textbf{可逆}, $g$为$f$的逆映射, 记为$f^{-1}$. 在这个定义下, 容易验证$f$可逆当且仅当$f$是一个双射. 
+
+聪明的你已经发现逆映射和原像集的符号都是$f^{-1}$. 
+\begin{example}
+    设$f: \R \to \R, f(x) = x^2$, 则$f^{-1}(\{1\}) = \{-1, 1\}$.
+    而$f^{-1}(1)$这一记号严格来说是没有定义的, 因为$f^{-1}$并不是映射, 它将一个元素$1$对应到了两个不同的元素$-1, 1$. 
+\end{example}
+然而, 在实际应用(特别是代数学)中, (依然是用上面这个例子)$f^{-1}(1)$这一记号通常就表示原像集: $f^{-1}(\{1\}) = f^{-1}(1)$. 我们不必纠结符号的问题, 在具体语境中具体分析即可.
+
+\subsubsection*{映射与集合运算的交换性}
+    设$f: X \to Y$, $\{A_i: i \in \calI \}$为$X$中的一族子集, $\{B_j: j \in \calJ \}$为$Y$中的一族子集. 我们有如下关系式:
+    \begin{enumerate}
+    \item $f^{-1}\br{\bigcap_{j \in \calJ}B_j} = \bigcap_{j \in \calJ} f^{-1}(B_j), \quad 
+           f^{-1}\br{\bigcup_{i \in \calI}A_i} = \bigcup_{i \in \calI} f^{-1}(A_i)$.
+    \item $f\br{\bigcap_{j\in \calJ}B_j} \subset \bigcap_{j \in \calJ} f(B_j), \quad  
+           f\br{\bigcup_{i \in \calI}A_i} = \bigcup_{i \in \calI} f(A_i)$.
+    \end{enumerate}
+\begin{proof}
+    \begin{enumerate}
+    \item 令$x \in f^{-1}(\bigcap_{j \in \calJ}B_j)$, 则$f(x) \in \bigcap_{j \in \calJ}B_j$, 则$f(x) \in B_j ~\forall j$, 所以$x \in f^{-1}(B_j)~\forall j$, 即$x \in \bigcap_{j \in \calJ}f^{-1}(B_j)$. 反过来, 令$x \in \bigcap_{j \in \calJ}f^{-1}(B_j)$, 则$x \in f^{-1}(B_j)~\forall j$, 所以$f(x) \in B_j~\forall j$, 即$f(x) \in \bigcap_{j \in \calJ}B_j$, 故$x \in f^{-1}\br{\bigcap_{j \in \calJ}B_j}.$  并运算的证明留做练习. 
+    \item 设$y \in f\br{\bigcap_{j \in \calJ}B_j}$, 则存在$x \in \bigcap_{j \in \calJ}B_j: y = f(x)$. 由$x \in B_j~\forall j$可知$f(x) \in f(B_j)~\forall j$, 从而$y = f(x) \in \bigcap_{j \in \calJ}f(B_j)$. 并运算的证明留做练习. \qed 
+    \end{enumerate} 
+\end{proof}
+\begin{example}
+    设$f: \R \to \R, f(x) = x^2$, 记$A = (-1,0), B = (0,1)$, 则$f(A \cap B)=\varnothing, f(A) \cap f(B) = (0,1)$. 
+\end{example}
+
+对于$f:X \to Y, B \subset Y$, 我们还有
+$$f^{-1}(B^c) = (f^{-1}(B))^c. $$
+\begin{proof}
+    设$x \in f^{-1}(B^c)$, 则$f(x) \in B^c$, 即$f(x) \notin B$, 从而$x \notin f^{-1}(B)$, 即$x \in (f^{-1}(B))^c$. 反过来, 若$x \notin f^{-1}(B)$, 则$f(x) \notin B$, 所以$f(x) \in B^c$, 即$x \in f^{-1}(B^c)$. \qed
+\end{proof}
+
+\begin{exercise}
+    设$f: X \to Y, A \subset X, B \subset Y$, 下列等式成立吗?
+    \begin{enumerate}
+    \item $f^{-1}(Y \setminus B) = f^{-1}(Y) \setminus f^{-1}(B)$;
+    \item $f(X \setminus A) = f(X) \setminus f(A)$. 
+    \end{enumerate}
+\end{exercise}

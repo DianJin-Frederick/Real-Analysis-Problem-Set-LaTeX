@@ -1,0 +1,69 @@
+\section{平移不变性与不可测集}
+\subsection{平移不变性}
+粉笔虽会越写越短, 但将它从粉笔盒中拿出到开始写字前, 其体积并未发生变化. 一个集合不论``搬"到哪里去, 其测度都不应改变, 这便体现了Lebesgue测度的平移不变性. 
+我们先熟悉一下集合之间的加法与数量乘法.
+\begin{definition}
+    设$A, B \subset \R^d, \lam \in \R$, 定义
+    \begin{itemize}
+    \item $A+B=\{a+b: a\in A, b\in B\}$,
+    \item $\lam A = \{\lam a: a \in A\}$.
+    \end{itemize}
+\end{definition}
+
+
+\begin{example}[~(UW-Madison Qual)]
+    设$E \subset \R$可测, 且对每个有理数$r$有$E+r=E$. 证明$E$或$E^c$是零测集.
+\end{example}
+\begin{proof}
+    这道题得用积分的平移不变性, 所以我们现在还做不了. 放在这里只是为了让大家意识到好多看起来是纯测度的题实际上要用到勒贝格积分的性质. \qed     
+\end{proof}
+
+\subsection{不可测集}
+我们在构造不可测集的证明中用到了一个核心思想: 利用测度的平移不变性构造出常数项正项级数(这种级数只能发散), 从而得出矛盾. 
+我们先构造一个集合, 再证明它不可测:
+在$[0,1]$上定义等价关系$x \sim y$当且仅当$x-y \in \Q$,
+则$\sim$给出了$[0,1]$的一个划分, 即$[0,1]$可以写成一些集合的无交并:
+$[0,1]=\bigcup_{\a \in A} \calE_a$($A$是某个指标集). 应用选择公理, 在每个$\calE_\a$中选出恰好一个$x_\a$, 令$\calN = \{x_\a: \a \in A\}$.
+
+\begin{theorem}
+    $\calN$不可测.
+\end{theorem}
+\begin{proof}
+    假设$\calN$可测, 记$\Q \cap [-1,1]=\{r_k\}_{k=1}^\infty$.
+    定义$\calN_k = \calN + r_k = \{x_\a + r_k\}_\a$, 接下来我们证明
+    \begin{itemize}
+    \item $\calN_k$互不相交, 
+    \item $[0,1] \subset \bigunion{k=1}{\infty}\calN_k \subset [-1,2]$. 
+    \end{itemize}
+    \begin{enumerate}
+    \item 如果$\calN_k \cap \calN_m \neq \varnothing$, 
+    那么$\exists x_a, x_b \in \calN$, 使
+    $x_\a + r_k = x_\b + r_m,$
+    则$x_\a-x_\b = r_m - r_k \in \Q$, 这说明$x_\a$与$x_\b$是同属一个等价类, 所以$x_\a, x_\b \in \calE_\a (=\calE_\b)$. 
+    回顾$\calN$的构造: 在每个等价类中选出恰好一个$x_\a$, 但是这里有两个元素, 那么它们必须相等. 于是$r_k=r_m$, 所以$\calN_k = \calN_m$. 
+    \item 因为$\calN \subset [0,1], r_k \in [-1,1]$, 所以$\calN+r_k \subset [-1,2]$. 
+    若$x \in [0,1] = \bigcup_{\a \in A}\calE_\a$, 则存在某个指标$\a \in A$, 使$x \in \calE_\a$, 于是$x \sim x_\a$, 则$x-x_\a \in \Q$. 我们之前枚举了$[-1,1]$的所有有理数, 所以存在$k \in \N$, 使
+    $x-x_\a = r_k$. 移项得
+    $$x = x_\a + r_k \in \calN + r_k = \calN_k.$$ 
+    既然$x$属于某个$\calN_k$, 则肯定有$x \in \bigunion{k=1}{\infty}\calN_k$. 我们刚才实际上说明了
+    $$x \in [0,1] \implies x \in \bigunion{k=1}{\infty}\calN_k,$$
+    故$[0,1] \subset \bigunion{k=1}{\infty}\calN_k$.
+    又因为每个$\calN_k \subset [-1,2]$, 最终得
+    $$[0,1] \subset \bigunion{k=1}{\infty}\calN_k \subset [-1,2].$$
+    \end{enumerate}
+    按照开头的假设, $\bigunion{k=1}{\infty}\calN_k$是可测集, 所以应该有$m\Brace{\bigunion{k=1}{\infty}\calN_k} \in [1,3]$, 而根据测度的平移不变性以及$\calN_k$互不相交又可得
+    $$m\Brace{\bigunion{k=1}{\infty}\calN_k}
+    = \Sum{k=1}{\infty}m(\calN_k) = \Sum{k=1}{\infty}m(\calN).$$
+    上式是一个常数项无穷级数. 试想一下, 把同一个数$c(\geq 0)$相加无穷多次会怎样? 若$c=0$, 则$c+c+\cdots = 0$; 若$c>0$, 则$c+c+\cdots$肯定等于$\infty$. 但是$0$和$\infty$都不属于$[1,3]$, 这就引出了矛盾, 所以$\calN$不可测. 
+\end{proof}
+
+我们可以使用同样的方法证明更一般的关于不可测集的结论.
+\begin{exercise} % Stein ex 1-32(a)
+    若$E$是$\calN$的一个可测子集, 则$m(E) = 0$. 
+\end{exercise}
+\begin{exercise} % Stein ex 1-32(b)
+    若$G$可测且具有正测度, 则$G$包含一个不可测子集.
+\end{exercise}
+
+其实, 构造不可测集根本就不需要``测度"这个概念! 测度的标准定义出现之前, 人们首先想的是能不能``测"出\textbf{所有}集合的大小, 而且这个``测量工具"得满足平移不变性与可数可加性, 即是否存在函数$\mu: \calP(\R) \to [0,\infty]$满足
+$\mu(E+a) = \mu(E)$以及$\mu\br{\bCup{n=1}{\infty}E_n} = \Sum{n=1}{\infty}\mu(E_n)$对所有$\R$的互不相交的子集都成立. 于是我们构造了不可测集, 利用这两条性质导出了矛盾, 说明这样的函数并不存在, 所以不是所有的集合都是可测的. 

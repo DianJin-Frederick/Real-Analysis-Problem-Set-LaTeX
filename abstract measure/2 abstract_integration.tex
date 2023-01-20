@@ -1,0 +1,27 @@
+\section{积分}
+
+\section{乘积测度}
+利用集合-代数结构证明集合的性质.
+\begin{example}
+    若 $E \in \calM \otimes \calN$, 则$\forall x \in X, E_x \in \calN$ 且 $\forall y \in Y, E^y \in \calM$.
+\end{example}
+\begin{proof}
+    写出定义$E_x=\{y \in Y: (x,y) \in E\}$似乎并没有什么帮助, 我们还是看不出来$E_x$到底长什么样. 这时就要用集合-代数结构避开``$E_x$的模样"这一难题. 我们将要证明的性质``$\forall x \in X, E_x \in \calN$ 且 $\forall y \in Y, E^y \in \calM$"用作集族的描述: 令
+    $$\calR = \left\{E \in \calM \otimes \calN: \forall x \in X, E_x \in \calN \text{~且~} \forall y \in Y, E^y \in \calM \right\},$$
+    然后研究$\calR$具有什么样的集合-代数结构.
+    设$\{E_n:n \in \N\} \in \calR$, 则$\Brace{\bigunion{n=1}{\infty}E_n}_x = \bigunion{n=1}{\infty}(E_n)_x \in \calN$ (因为$\calN$是个$\sigma$-代数). 若$E \in \calR$, 则$(E^c)_x = (E_x)^c \in \calN$. 类似地, $\Brace{\bigunion{n=1}{\infty}E_n}^y \in \calM$ 且
+    $(E^c)^y \in \calM$, 这就证明了$\calR$是一个$\sigma$-代数. 
+    最后, $\calR$本身包含了所有形如$A \times B (A \in \calM, B \in \calN)$的集合, 而根据定义, 
+    $\calM \otimes \calN$又由$\{A \times B: A \in \calM, B \in \calN\}$生成, 所以得包含关系
+    $$\calR \supset \calM \otimes \calN.$$ 
+    若$E \in \calM \otimes \calN$, 则$E \in \calR$, 则$\forall x \in X, E_x \in \calN$ 且 $\forall y \in Y, E^y \in \calM$.    
+\end{proof}
+
+\subsection{Fubini定理}
+Fubini定理的条件``$\sigma$-有限"不能少.
+\begin{example} % Folland 2.46
+    设$X=Y=[0,1], \calM = \calN = \calB_{[0,1]}$, $\mu=$Lebesgue测度, $\nu=$计数测度. 令
+    $D=\{(x,x): x\in [0,1]\}$, 则
+    $$\iint \chi_D d\mu d\nu, \quad \iint \chi_D d\nu d\mu, \quad \int \chi_D d(\mu \times \nu)$$
+    互不相等.
+\end{example}

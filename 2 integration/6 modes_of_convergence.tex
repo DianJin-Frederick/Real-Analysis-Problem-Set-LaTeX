@@ -1,0 +1,189 @@
+\section{难点: 函数列的收敛模式}
+% 主要参考Folland 2.4
+论证极限与积分次序可以交换的最常用的工具是单调收敛定理与控制收敛定理. 在控制收敛定理中, 我们其实得到的是更广泛的结论: $\int |f_n - f| \to 0$, 即$\|f_n - f\|_{L^1} \to 0$, 根据三角不等式可得$\int f_n \to \int f$. 当然, 交换次序的充分条件肯定不止上面这两个定理, 其余用途没那么广泛的结论便散落在各个教材的习题, 各个学校的考试中, 悄无声息地消磨萌新学习实变函数的热情. 大家不必感到恐惧, 这部分内容在后续课程中用得很少, 建议仅在考前学习本节. 
+\subsection{依测度收敛}
+\begin{definition}
+    设$\{f_n\}$为一列可测函数. 如果对任意$\eps > 0$, 有
+    $$m(\{x: |f_n(x) - f(x)| \geq \eps\}) \to 0 \quad (n \to \infty),$$
+    则称$f_n$依测度收敛于$f$. 为下文描述方便, 将其记作$f_n \xrightarrow[]{m} f$. 
+\end{definition}
+首先, 这是我们非常熟悉的数列收敛. 对每个$n$, 把$f_n(x)$离$f(x)$不是那么近的点挑出来, 量出它的测度, 得到一个数列. 依测度收敛说得便是这个数列趋于0:
+那些离$f(x)$有些远的点``越来越少".
+\begin{exercise}
+    写出依测度收敛的否定.
+\end{exercise}
+\begin{exercise}
+    证明: 若$f_n \xrightarrow[]{m} f$, 则$\{f_n\}$的任一子列也依测度收敛于$f$. 
+\end{exercise}
+\begin{exercise}
+    判断: 对可测函数列$\{f_n\}$, 若对任意$\eps>0$, 有
+    $$m(\{x: |f_n(x) - f(x)| > \eps\}) \to 0 \quad (n \to \infty),$$
+    那么$f_n$依测度收敛于$f$吗?
+\end{exercise}
+\begin{exercise}
+    $f_n$依测度收敛于$f$当且仅当
+    $$\forall \eps > 0 ~\exists N \in \N: 
+    \mu(\{x:|f_n(x)-f(x)| \geq \eps\}) < \eps ~\forall n \geq N.$$
+\end{exercise}
+我们列出两个常用结论:
+% 看maki正课讲不讲
+\begin{proposition}
+    \begin{enumerate}
+    \item 如果$\|f_n - f\|_{L^1} \to 0$, 则$f_n$依测度收敛于$f$. 
+    \item 如果$f_n$依测度收敛于$f$, 则存在子列$\{f_{n_j}\}$几乎处处收敛于$f$. 注意, 此处并非一致收敛, 而是对几乎处处的$x$, 有$f_{n_j}(x) \to f(x)~(j \to \infty)$.
+\end{enumerate}
+\end{proposition}
+依测度收敛也可由度量导出.
+\begin{example}
+    设$X \subset \R^d, m(X)<\infty$, $f, g: X \to \R$. 定义
+    $$\rho(f,g) = \int \frac{|f(x)-g(x)|}{1+|f(x)-g(x)|}dx.$$
+    证明
+    \begin{enumerate}
+        \item $\rho$是可测函数构成的向量空间上的度量.
+        \item $\rho(f_n, f) \to 0$当且仅当$f_n$依测度收敛于$f$. 
+    \end{enumerate}
+\end{example}
+\begin{proof}
+    第一问留作习题: 证明三角不等式可以考虑利用函数$1/(1+x)$的性质.
+    设$f_n \xrightarrow[]{m} f$, 设$\eps > 0$, 则
+    $$m(\{x:|f_n(x)-f(x)| \geq \eps\}) \to 0 \quad n \to \infty.$$
+    我们发现$m$里面的集合非常有用, 记$A_{n, \eps} = \{x:|f_n(x)-f(x)| \geq \eps\},$ 则$A_{n, \eps}^c = \{x:|f_n(x)-f(x)| < \eps\}$. 于是,
+    \begin{align*}
+    \int \frac{|f_n(x)-f(x)|}{1+|f_n(x)-f(x)|}dx
+    &= \int_{A_{n,\eps}}\frac{|f_n(x)-f(x)|}{1+|f_n(x)-f(x)|}dx 
+       + \int_{A_{n,\eps}^c}\frac{|f_n(x)-f(x)|}{1+|f_n(x)-f(x)|}dx \\
+    &\leq m(A_{n, \eps}) + \eps m(X).
+    \end{align*}
+    由依测度收敛的定义, 当$n$非常大时, 有
+    $m(\{x:|f_n(x)-f(x)| \geq \eps\}) < \eps$ (这两个$\eps$并不矛盾!), 则$$ m(A_{n,\eps}) + \eps m(X) < (1+m(X))\eps, $$ 
+    所以$\rho(f_n, f) \to 0$. 
+
+    反过来, 设$\rho(f_n, f) \to 0$. 记$g_n(x) =  \frac{|f_n(x)-f(x)|}{1+|f_n(x)-f(x)|}$, 设$\eps > 0$, 记
+    $G_{n,\eps} = \{x: g_n(x) \geq \eps\}$. 则
+    $$\int g_n(x)dx = \int_{G_{n,\eps}}g_n(x)dx + 
+      \int_{G_{n,\eps}^c} g_n(x)dx \geq \eps m(G_{n,\eps})
+      +  \int_{G_{n,\eps}^c} g_n(x)dx, $$
+    令$n \to \infty$, 则$\eps \mu(G_{n,\eps}) \to 0$. 由于$\eps$取定, 故$ \mu(G_{n,\eps}) \to 0 $.
+    最后, 
+    $$\frac{|f_n(x)-f(x)|}{1+|f_n(x)-f(x)|}>\eps \implies 
+    |f_n(x)-f(x)| > \frac{\eps}{1-\eps}.$$
+    当$\eps$取遍所有正数时, $\eps/(1-\eps)$也能取遍所有正数, 因为
+    $\eps \mapsto \eps/(1-\eps)$为满射. 我们得到结论: $f_n \xrightarrow[]{m} f$.
+\end{proof}
+\begin{remark}
+    我们挖掘一些上述证明过程中的注意点\footnote{在此感谢2022年秋学期在UW-Madison上Math 721的同学, 你们作业中的问题提供了足量的素材, 让我总结出了一些注意事项. }. 
+    \begin{enumerate}
+    \item 养成良好的习惯: 给集合$\{x:|f_n(x)-f(x)| \geq \eps\}$取名字时最好不要直接给个字母$A$, 因为$n$在变, $\eps$在有需要时也会变, 取记号时应该包含这些信息, 用上下标或括号的形式体现出来, 如
+    $$A_{n,\eps},\quad A_n^\eps,\quad A(n,\eps), \quad \cdots$$
+    \item 证明的核心步骤利用了一种``微妙的平衡": 函数值大的集合测度小, 函数值小的集合测度是有限的. 之后我们会常常用到这一思想.
+    \end{enumerate}
+\end{remark}
+\begin{example}
+    设$f_n$依测度收敛于$f$, $g_n$依测度收敛于$g$. 则
+    \begin{enumerate}
+    \item $f_n+g_n$依测度收敛于$f+g$.
+    \item 若$f_n, g_n$定义在有限测度集上, 则$f_ng_n$依测度收敛于$fg$. 
+    \end{enumerate}
+\end{example}
+
+\begin{exercise}
+    若$f_n \geq 0$且$f_n$依测度收敛于$f$, 则$\int f \leq \liminf_{n \to \infty}\int f_n$.
+\end{exercise}
+
+
+
+
+\subsection{还有哪些条件可以保证换序?}
+控制收敛定理因其条件简单而获得广泛应用. 保留住``$f_n \to f$ a.e."这一条件, 还有哪些假设能够保证$\int f_n \to \int f$? 我们以Vitali收敛定理作为例子. 
+
+\begin{definition}[一致可积]
+    设$\{f_n\}_{n \in \N}$为一列定义在集合$E$上的可测函数, 其中$m(E) < \infty$. 如果对任意的$\eps>0$都存在$\d>0$, 当$m(E)<\delta$时, 有
+    $$\sup_{n \in \N} \abs{\int_E f_n(x) dx} < \eps,$$
+    则称$\{f_n\}_{n \in \N}$一致可积(uniformly integrable).
+\end{definition}
+此时大家肯定想到了积分的绝对连续性: 只要集合够小, 可积函数在这个集合上的积分就可以足够小. 一致可积性不过是把单个函数的绝对连续性推广至了一列函数的绝对连续性. 
+\begin{example}[~(Vitali收敛定理·简单版本)]
+    设$X \subset \R^d, m(X) < \infty$, $\{f_n\}_{n \in \N}$一致可积, 且$f_n(x) \to f(x)$ a.e., $|f(x)|$几乎处处有限. 证明
+    $$\lim_{n \to \infty} \int_E f_n(x)dx = \int_E f(x)dx.$$
+\end{example}
+\begin{proof}
+    令$\eps>0$, 则由一致可积性知存在$\d>0$, 可测集$A$只要满足$m(A) < \d$就能推出$\int_A |f_n(x)|dx < \eps~\forall n \in \N$. $f_n$几乎处处收敛于$f$的最大问题是缺乏一致性, 所以不能直接放到积分号下进行估计. 应用Egorov定理\footnote{不要忘了Egorov定理的条件: 函数列定义在有限测度集上. 这里$m(X)<\infty$满足定理的假设.}
+    可以让$\{f_n\}_{n \in \N}$在一个``很小"的集合外一致收敛. 对刚才取好的$\d$, 存在集合$E: m(E) < \d$且$f_n$在$E^c$中一致收敛于$f$. 于是,
+    \begin{align*}
+        \int_X |f_n(x)-f(x)|dx
+        &= \int_E |f_n(x)-f(x)|dx + \int_{E^c}|f_n(x)-f(x)|dx \\
+        &\leq \int_E |f_n(x)|dx + \int_E |f(x)|dx + \int_{E^c}|f_n(x)-f(x)|dx.
+    \end{align*}
+    由一致可积性知$\int_E |f_n(x)|dx < \eps$, 由一致收敛性知$\int_{E^c}|f_n(x)-f(x)|dx < \eps$(当$n$非常大时), 现在只剩下中间一项. 数列极限有个非常有用的性质: 保不等式性. 一个收敛数列如果每项都小于等于$M$, 那么它的极限也不会超过$M$. 但是这里我们并没有$f_n$一致收敛于$f$, 所以无法跨过积分这道坎, 这时就该请出Fatou引理了:
+    \begin{align*}
+        \int_E |f(x)|dx
+        &= \int_E \liminf_{n \to \infty} |f_n(x)|dx \quad 
+           (f_n(x) \to f(x) \text{ a.e.})\\
+        &\leq \liminf_{n \to \infty} \int_E |f_n(x)|dx \quad 
+              (\text{Fatou引理})\\
+        &< \eps. \quad (\text{一致可积性, } m(E) < \delta)
+    \end{align*}
+    三剑合璧, 得
+    $$\int_X |f_n(x)-f(x)|dx < 3\eps,$$
+    定理得证. \qed
+\end{proof}
+接下来的练习主要研究哪些假设能够保证极限与积分交换次序. 这些题目的结论都是$\lim_{n \to \infty}\int f_n = \int f$或$\lim_{n \to \infty}\int |f_n-f|=0$. 根据三角不等式, 后者可以推出前者.
+\begin{exercise}
+    利用Vitali收敛定理推出控制收敛定理.
+\end{exercise}
+\begin{proof}
+    提示: 将$\R^d$拆成$E \cup E^c$, 其中$E$为有限测度集, 且控制函数$g$的积分都``集中"在$E$上. 
+\end{proof}
+\begin{exercise}
+    设$f_n: X \to \R, m(X) < \infty$ 且 $\{f_n\}_{n \in \N} \subset L^1$, $f_n$一致收敛于$f$. 证明$f \in L^1$且$\int f_n \to \int f$.  
+\end{exercise}
+\begin{exercise} % Folland ex 2.20
+    (推广的控制收敛定理) 令$f_n, g_n, f, g \in L^1, f_n \to f$ a.e., $g_n \to g$ a.e., $|f_n| \leq g_n, \int g_n \to \int g$, 则
+    $\int f_n \to \int f$. 
+\end{exercise}
+
+\begin{exercise}
+    设$f_n \geq 0$, $f_n$依测度收敛于$f$, 则$\int f \leq \liminf_{n \to \infty} \int f_n$.
+\end{exercise}
+\begin{proof}
+    提示: 数列的下极限就是其某个子列的极限; 由$f_n$依测度收敛于$f$可知$\{f_n\}$有一个几乎处处(逐点)收敛的子列.
+\end{proof}
+\begin{exercise}
+    设$|f_n|\leq g \in L^1, f_n$依测度收敛于$f$. 证明
+    \begin{enumerate}
+        \item $\int f = \lim \int f_n$.
+        \item $\|f_n - f\|_{L^1} \to 0$.
+    \end{enumerate}
+\end{exercise}
+\begin{exercise}
+    设$f_n, f \in L^1, f_n \to f$ a.e. 则$\int |f_n-f| \to 0$当且仅当
+    $\int |f_n| \to \int |f|$. 
+\end{exercise}
+\begin{exercise} % Math 721 HW 3 Fall 2022
+    
+\end{exercise}
+
+
+\subsection{收敛性大杂烩}
+函数列的各种收敛性绝对是萌新学习实变函数的一大噩梦, 不过这部分内容后面用得很少, 如果不是为了准备考试, 第一遍学时完全可以跳过. 目前为止, 我们学习过以下(包括但不限于)收敛性:
+\begin{itemize}
+    \item 一致收敛;
+    \item 几乎处处收敛;
+    \item $L^1$收敛: $\int |f_n-f| \to 0$;
+    \item 换序收敛: $\int f_n \to \int f$;
+    \item 依测度收敛.
+\end{itemize}
+我们先用几个例子说明前3种收敛性的关系. 例子来自Folland, \textit{Real Analysis}的2.4节, 作者本人也建议牢记这些例子.
+\begin{enumerate}
+    \item $f_n = n^{-1}\chi_{(0,n)}$.
+    \item $f_n = \chi_{(n,n+1)}$.
+    \item $f_n = n\chi_{[0, 1/n]}$.
+    \item (打字机函数列) $f_1=\chi_{[0,1]}, f_2=\chi_{[0,1/2]}, 
+    f_3=\chi_{[1/2,1]}, f_4=\chi_{[0,1/4]}, f_5=\chi_{[1/4,1/2]}, 
+    f_6=\chi_{[1/2,3/4]}, f_7=\chi_{[3/4,1]}, \cdots. $
+\end{enumerate}
+
+\subsection{思想方法总结}
+
+
+

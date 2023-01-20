@@ -1,0 +1,26 @@
+\section{利用积分理论解决测度问题}
+``实分析"是个庞大的体系, 分析学中的各种理论与技巧都可以塞进这个框, 所以Maki's Lab实分析小组将其拆分为三大部分, 以便初学者入门现代分析学. 
+实分析I的副标题为``测度与积分", 目前大家可能觉得测度就是测度, 积分就是积分, 但它们可以由特征函数自然地联系起来:
+$$m(E) = \int_{\R^d} \chi_{E}(x) dx.$$
+学到抽象测度时, 我们会知道: 积分只是测度的一个例子. 
+
+许多问题的题干中只有Lebesgue测度, 看起来像是只用测度的一堆性质就能做出来. 实际上, 这些题需要利用特征函数联系测度与积分, 再利用积分的性质解决. 
+\begin{example} %UW-Madison Qual
+    设$E \subset \R$可测且具有有限测度. 定义函数$f:\R \to \R$,
+    $f(x)=m(E \cap(E+x))$. 证明$f$连续.
+\end{example}
+\begin{proof}
+    
+\end{proof}
+
+\begin{example} %UW-Madison Qual
+    Let $E \subset[0,1]$ be a Lebesgue measurable set with $m(E)>0.999$. Prove that there exists $\epsilon_0>0$ such that for every $t \in\left(0, \epsilon_0\right)$, we can always find $x$ such that $x, x+t, x+t^2 \in E$.
+
+    Hint: Try estimating $\int_0^1\left(\chi_E(x)+\chi_E(x+t)+\chi_E\left(x+t^2\right)\right) d x$, where $\chi_E$ is the characteristic function of $E$.
+\end{example}
+
+\begin{example} %UW-Madison Qual
+    Let $E \subset[0,1]$ be a measurable set with positive Lebesgue measure. Let $\chi$ be the characteristic function of $E$.
+    (a) Let $F(x)=\int_{\mathbb{R}} \chi(x-t) \chi(t) d t$. Prove that $F$ is a continuous function.
+    (b) Let $E+E=\left\{e_1+e_2 \in \mathbb{R} \mid e_1 \in E, e_2 \in E\right\}$. Prove that $E+E$ contains a non-empty open subset of $\mathbb{R}$.
+\end{example}

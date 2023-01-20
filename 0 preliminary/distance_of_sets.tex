@@ -1,0 +1,47 @@
+\section{点集间的距离}
+首先定义点与集合间的距离. 设$E \subset \R^n, x \in \R^n$, 定义$x$与$E$的\textbf{距离}为
+$$d(x,E) = \inf_{y \in E} |x-y|, $$
+其中$|x-y| = \sqrt{(x_1-y_1)^2 + \cdots + (x_n-y_n)^2}$.
+\begin{example}
+    设$E \subset \R^n$, 则$d(x,E) = 0 \iff x \in \cl{E}$. 
+\end{example}
+\begin{proof}
+    若$x \in \cl{E}$, 则存在$\{y_n\} \subset E$使得$\lim_{n \to \infty}y_n = x$, 所以$\inf_{n \in \N}|x-y_n| = 0$, 故$d(x,E) = 0$. 反过来, 若$\inf_{y \in E}|x-y| = 0$, 则存在$E$中的点列$\{y_n\}$满足$|y_n - x| \to 0$, 所以$x \in \cl{E}$. \qed 
+\end{proof}
+\begin{exercise}
+    设$F \subset \R^n$为闭集, 则$d(x,F) = 0 \iff x \in F$.
+\end{exercise}
+\begin{example}
+    固定集合$E \subset \R^n$, 我们可以将$d(x,E)$看作$x$的函数, 即定义
+    \begin{align*}
+        f: \R^n &\to [0,\infty) \\
+        f(x) &= d(x,E).
+    \end{align*}
+    证明: $f$是一个连续函数. 
+\end{example}
+\begin{proof}
+    设$x_n \to x$, 我们证明$d(x_n,E) \to d(x,E)$. 设$y \in E$, 则$|x-y| \leq |x-x_n| + |x_n-y|$, 从而
+    \begin{align*}
+        &|x-y|-|x_n-y| \leq |x-x_n|, \\
+        &|x_n-y| - |x-y| \geq -|x-x_n|.
+    \end{align*}
+    设$\eps>0$, 则存在$N \in \N$使得$|x_n - x|<\eps~\forall n > N$. 从而
+    \begin{align*}
+        &|x_n-y| \leq \eps + |x-y|, \\
+        &|x_n-y| \geq |x-y|-\eps.
+    \end{align*}
+    两边对$y$取下确界得
+    \begin{align*}
+        &d(x_n,E)-d(x,y) \leq \eps, \\
+        &d(x_n,E)-d(x,y) \geq -\eps.
+    \end{align*}
+    也就是说, 对任意$\eps>0$都存在$N\in\N$使得$n>N$时, $|d(x_n,E)-d(x,y)| \leq \eps$, 所以
+    $$\limsup_{n\to \infty}|d(x_n,E)-d(x,y)|=0. $$
+    由归结原则知$f(x)=d(x,E)$连续. \qed    
+\end{proof}
+今后我们会利用距离函数的连续性(开集的原像是开集)构造一些开集, 例如$U_n := \{x \in \R^n: d(x,E) < 1/n\}$.
+
+现在看点集与点集间的距离. 我们的定义还是基于点与点的距离, 不过这次要让两个点都动起来. 设$E,F \subset \R^n$, 定义$E$与$F$的\textbf{距离}为
+$$d(E,F) = \inf\{|x-y|: x \in E, y \in F\}.$$
+
+对单独的一个集合$A$, 定义其\textbf{直径}(diameter)为$d(A) = \sup_{x,y \in A} |x-y|$. 由于不会引起歧义, 我们仍采用字母$d$. 

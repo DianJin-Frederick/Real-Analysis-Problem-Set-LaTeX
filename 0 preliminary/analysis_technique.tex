@@ -1,0 +1,89 @@
+\section{An Epsilon of Room\footnote{本节标题取自陶哲轩的著作“An Epsilon of Room, I: Real Analysis: Pages from year three of a mathematical blog”}}\label{epsilon_room}
+陶哲轩在2009年2月28号发布了一篇博文``Give yourself an epsilon of room"\footnote{\url{https://terrytao.wordpress.com/2009/02/28/tricks-wiki-give-yourself-an-epsilon-of-room/}}. 他在开头写道:
+
+You want to prove some statement $S_0$ about some object $x_0$ (which could be a number, a point, a function, a set, etc.).  To do so, pick a small $\varepsilon > 0$, and first prove a weaker statement $S_\varepsilon$ (which allows for ``losses" which go to zero as $\varepsilon \to 0$) about some perturbed object $x_\varepsilon$.
+
+大意是说, 我们想要证明关于某个数学对象$x_0$(可以是数, 点, 函数, 集合等等)的一个陈述$S_0$, 
+可以取一个小的$\eps>0$, 先证明一个弱的陈述$S_\eps$, 然后再令$\eps \to 0$. 
+
+接下来, 我们看一些``an epsilon of room"思想的具体应用.
+\subsection{分析学中无等号}
+%在经过数学分析的洗礼后, 大家对“$\eps$”这个希腊字母可谓是爱恨交加, 毕竟分析学研究的就是在$\eps$前配上什么样的常数来让结果更好看. 大家不妨先动动手复习一下刚学数学分析时遇到的一个小结论:
+我们先复习数学分析中最基本的概念, 来看看到底有没有等式.
+\begin{enumerate}
+    \item 数列极限: $\lim_{n \to \infty}a_n = a \iff \forall \eps>0~\exists N \in \N~\forall n > N: |a_n-a| < \eps$. (用不等式定义的)
+    \item 级数收敛: $\Sum{n=1}{\infty} a_n < \infty \iff \forall \eps>0~\exists N \in \N: \abs{\Sum{n=N}{\infty}a_n} < \eps$. (尾巴项很小, 依然是不等式. 另一种是部分和数列收敛的定义方式, 与数列极限定义一样)
+    \item 函数极限: $\lim_{x \to x_0} f(x) = A \iff \forall \eps>0~\exists \delta>0~\forall x \in (x_0 - \d, x_0 + \d): |f(x) - A|<\eps$. (不等式)
+    \item 导数: 这是用极限运算定义的, 所以是不等式.
+    \item 黎曼积分: $f$黎曼可积$\iff \forall \eps > 0$存在$[a,b]$的一个划分$P$使得上下和之差$<\eps$. (不等式)  
+\end{enumerate}
+就连最简单的$a=b$, 都可以看作是$a\leq b$且$a \geq b$! 想要分析味再浓一点, 请看(复习)下面的练习:
+\begin{exercise}
+    设$a,b \in \R$, 则
+    \begin{enumerate}
+    \item $a \leq b$当且仅当$a<b+\eps$对所有的$\eps>0$都成立. 
+    \item $a \leq b$当且仅当$a<(1+\eps)b$对所有的$\eps>0$都成立. 
+    \end{enumerate}
+\end{exercise}
+在数学分析中, 大多数极限计算题都可以通过一些代数变形一步一步$a=b=c=\cdots$算出结果, 
+而在实分析中, 我们要证明的等式往往会同时集齐\textbf{上下确界, 可数求和, 极限运算, 可数交并}这几大要素, 这时就只能用``an epsilon of room"进行证明, 大家在正课``勒贝格外测度"中就会初次体验到.
+
+\subsection{上下极限: 会用就行}
+接下来我们复习上下极限的应用. 上极限与下极限的相关内容可参见Ayumu的数学分析, 这里我们仅复习4个要点: 设$\{a_n\}$为一数列,
+\begin{enumerate}
+    \item $\{a_n\}$的上极限是其所有收敛子列的极限的上确界.
+    \item $\{a_n\}$的下极限是其所有收敛子列的极限的下确界.
+    \item $\{a_n\}$收敛当且仅当$\limsup_{n\to \infty} a_n = \liminf_{n\to \infty} a_n$, 此时$\lim_{n \to \infty} a_n = \limsup_{n\to \infty} a_n$.
+    \item 若$a_n \leq M_1~\forall n$, 则$\limsup_{n\to \infty} a_n \leq M_1$;
+          若$a_n \geq M_2~\forall n$, 则$\liminf_{n\to \infty} a_n \geq M_2$.
+\end{enumerate}
+
+\begin{exercise}
+    设$\{a_n\}_{n\in \N}$为一数列, $a \in \R$, 证明: 
+    $\lim_{n \to \infty}a_n = a$当且仅当$\limsup_{n\to \infty}|a_n-a|=0$.
+\end{exercise}
+\begin{exercise}
+    设$a_1, \cdots, a_M$为正实数, 问:
+    $$\br{\frac{a_1^n + \cdots + a_M^n}{M}}^{1/n}$$
+    的极限存在吗?($n \to \infty$). 如果存在, 等于多少?
+\end{exercise}
+\begin{proof}
+    因为$a_1^n + \cdots a_M^n \leq M \max (a_1^n, \cdots, a_M^n)$,
+    所以
+    $$\limsup_{n \to \infty}\br{\frac{a_1^n + \cdots + a_M^n}{M}}^{1/n}
+    \leq \lim_{n \to \infty}\br{\max (a_1, \cdots, a_M)^n}^{1/n} = \max (a_1, \cdots, a_M). $$
+    反过来, $a_1^n + \cdots a_M^n \leq \max (a_1^n, \cdots, a_M^n)$, 所以
+    $$\liminf_{n \to \infty}\br{\frac{a_1^n + \cdots + a_M^n}{M}}^{1/n}
+    \geq \lim_{n \to \infty}\br{\frac{1}{M}}^{1/n} \max (a_1^n, \cdots, a_M^n) =
+    \max (a_1, \cdots, a_M). $$
+    故$$\lim_{n \to \infty}\br{\frac{a_1^n + \cdots + a_M^n}{M}}^{1/n}
+    = \max (a_1^n, \cdots, a_M^n). $$ \qed
+\end{proof}
+在学习勒贝格微分定理时, 我们还会用到函数的上极限. 设$\phi:\R \to \R$, 定义
+$$\limsup_{r \to R} \phi(r) = \lim_{\d \to 0} \sup_{0<|r-R|<\delta} \phi(r). $$
+我们先来理解一下这个定义. 让$\d>0$动起来, 则$\sup_{0<|r-R|<\delta}\phi(r)$就是个跟$\d$有关的函数. 当$\d$单调递减趋于$0$时, 上确界也跟着单调递减, 所以极限存在. 
+函数的上极限也有与数列类似的结论:
+\begin{example}
+    $\lim_{r \to R}\phi(r) = c \iff \limsup_{r \to R} |\phi(r) - c| = 0$.
+\end{example}
+\begin{proof}
+    设$\limsup_{r \to R} |\phi(r) - c| = 0$, 则
+    $$\forall \eps > 0 ~\exists \delta_0 ~\forall \d \in (0, \d_0): 
+    \sup_{0<|r-R|<\d}|\phi(r)-c| < \eps. $$
+    将上确界转化为任意性得
+    $$\forall ~\eps > 0 ~\exists \delta_0 ~\forall \d \in (0, \d_0): 
+    |\phi(r)-c| < \eps~\forall r \in (R-\d, R) \cup (R, R+\d), $$
+    再稍稍改写可得
+    $$\forall \eps > 0 ~\exists \d>0 ~\forall r \in (R-\d, R) \cup (R, R+\d):
+    |\phi(r)-c| < \eps, $$
+    即$\lim_{r \to R}\phi(r) = c$. \\
+    反过来, 有$$\forall \eps > 0~\exists \d_0~\forall r \in (R-\d,R) \cup (R,R+\d): |\phi(r)-c| < \eps. $$
+    将任意性转化为上确界得
+    $$\forall \eps > 0~\exists \d_0: \sup_{0<|r-R|<\d_0} |\phi(r)-c| \leq \eps.$$
+    对每个$\d<\d_0$定义$g(\d) = \sup_{0<|r-R|<\d} |\phi(r)-c|$, 则
+    $g(\d) \leq \sup_{0<|r-R|<\d_0} |\phi(r)-c| \leq \eps$. 这说明
+    $$\forall \eps > 0 ~\exists \d_0 ~\forall \d<\d_0: g(\d) \leq \eps, $$
+    即
+    $$\lim_{\d \to 0} g(\d) = \lim_{\d \to 0}\sup_{0<|r-R|<\d} |\phi(r)-c|=0. $$
+    \qed 
+\end{proof}

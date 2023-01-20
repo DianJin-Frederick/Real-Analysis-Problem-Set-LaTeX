@@ -1,0 +1,66 @@
+\section{可测函数}
+最重要的定理: 可测函数可由简单函数逼近.
+\subsection{可测函数类的封闭性}
+设$\{f_n: n \in \N\}$是一列可测函数, 则下列函数均可测:
+\begin{enumerate}
+{\everymath{\displaystyle}
+    \item $\sup_{n \in \N}f_n$;
+    \item $\inf_{n \in \N} f_n$;
+    \item $\limsup_{n \in \N} f_n$;
+    \item $\liminf_{n \in \N} f_n$.}
+\end{enumerate}
+\begin{remark}
+    输入一个$x$, $\sup_n f_n(x)$就是一个数列的上确界. 
+    这样$\sup_n f_n$就确定了一个函数: 
+    $$\left(\sup_n f_n\right)(x) = \sup_n \{f_n(x)\}.$$
+\end{remark}
+若$f_n \to f$ a.e., 则$\limsup f_n = \liminf f_n = f$ a.e., 从而$f$可测. 我们得出可测函数类对(逐点)极限运算封闭, 连续函数做得到吗? 
+
+\begin{exercise}
+    构造一个可测函数$f$和一个连续函数$\phi$, 使得$f \circ \phi$不可测.
+    以此构造证明存在不是博雷尔集的勒贝格可测集, 因而勒贝格$\sigma$代数真包含博雷尔$\sigma$代数
+\end{exercise}
+
+
+
+\subsection{验证可测函数}
+\begin{example}[~(Dini导数)] % Stein ex 3.14
+    设$F: [a,b] \to \R$连续. 证明
+    $$D^+(F)(x) = \limsup_{h \to 0^+}\frac{F(x+h)-F(x)}{h}$$
+    可测. 
+\end{example}
+\begin{solution}
+    我们要把连续型的极限转化为离散型的极限, 这样才能利用可测函数类的封闭性. 根据函数上极限
+    \footnote{为了不让读者翻到前面寻找, 打断阅读, 故将定义再复习一遍: $\limsup_{h \to 0}f(h) = \lim_{\delta \to  0} \sup_{0<|h|<\delta} f(h)$.}
+    的定义,
+    $$\limsup_{h \to 0^+}\frac{F(x+h)-F(x)}{h} = 
+    \lim_{\delta \to 0}\sup_{0<h<\delta}\frac{F(x+h)-F(x)}{h}.$$
+    将极限右侧的上确界看作一个整体
+    $\displaystyle{G(\delta)=\sup_{0<h<\delta}\frac{F(x+h)-F(x)}{h} }$, 则$G$单调增, 所以其极限存在(包括$\infty$). 这样我们就可以取$\delta=1/n \to 0$, 完成第一次离散化:
+    $$\limsup_{h \to 0^+}\frac{F(x+h)-F(x)}{h} = 
+    \lim_{n \to \infty}\sup_{0<h<1/n}\frac{F(x+h)-F(x)}{h}.$$
+    现在只需证明对每个$n \in \N$, $\displaystyle{\sup_{0<h<1/n}\frac{F(x+h)-F(x)}{h}}$可测.
+    但是, 该上确界是对不可数个$h$取的, 所以我们要把“卡池”转化为可数的. 回忆到连续函数的值完全由其在有理数上的值决定, 所以猜测:
+    $$A := \sup_{0<h<1/n}\frac{F(x+h)-F(x)}{h}=\sup_{h \in (0, 1/n) \cap \Q}
+    \frac{F(x+h)-F(x)}{h} := B.$$
+    由于$(0,1/n)\cap \Q \subset (0, 1/n)$, 得$A \geq B$. 
+    记$\displaystyle{f(h)=\frac{F(x+h)-F(x)}{h}}$, 由$A=\sup_{0<h<1/n}f(h)$可知存在数列$\{x_j\} \subset (0,1/n)$使$f(x_j) \to A$. 如果我们能找到$(0,1/n)$中的有理数列$\{y_j\}$使得$f(y_j) \to A$, 就可以证明命题. 根据有理数集的稠密性, 对每个$x_j$, 都有有理数列$\{y_{k,j}:k \in \N \} \subset (0, 1/n) \cap \Q$满足$y_{k,j} \to x_j (k \to \infty)$. 由$f$的连续性可知$f(y_{k,j}) \to f(x_j) (k \to \infty)$. 
+    $$\begin{matrix}
+        f(y_{1,1}) & f(y_{1,2}) & f(y_{1,3}) & \cdots & \\
+        f(y_{2,1}) & f(y_{2,2}) & f(y_{2,3}) & \cdots & \\
+        f(y_{3,1}) & f(y_{3,2}) & f(y_{3,3}) & \cdots & \\
+        \vdots  & \vdots  & \vdots  &  \\
+        \downarrow & \downarrow & \downarrow &  \\
+        f(x_1)     & f(x_2)     & f(x_3)     & \cdots & \to A
+    \end{matrix}$$
+    面对这种二重极限, 我们应用Cantor对角化法则(Cantor diagonalization), 取$\{y_j\}=\{y_{j,j}\}$, 便得$f(y_{j}) \to A$, 从而$B\geq A$, 所以$A=B$. 
+\end{solution}
+\textbf{总结}: 
+    若将$(0,1/n) \cap \Q$的点一一列出: $\{a_1, a_2, \cdots\}$, 我们可得可测函数列
+    $f(a_n)=(F(x+a_n)-F(x))/a_n$, 可记作$g_n(x)=(F(x+a_n)-F(x))/a_n$. 一开始的上极限就可写成
+    $$\lim_{n\to \infty}\sup_{n \in \N} g_n(x),$$
+    这显然是一个可测函数. 
+    
+\begin{knowledge}
+    上极限的定义; 函数极限的序列形式; 可测函数类得封闭性; Cantor对角化法则
+\end{knowledge}

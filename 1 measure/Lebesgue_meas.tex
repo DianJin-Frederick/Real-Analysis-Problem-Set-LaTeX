@@ -1,0 +1,193 @@
+\section{勒贝格外测度与测度的构造}
+\subsection{正课内容总结}
+在正课中, 我们从区间长度出发, 利用下确界定义了所有集合的勒贝格外测度, 再使用Carath\'eorody条件加以限制, 得到了$\calP(\R)$的一个真子族: 勒贝格可测集构成的集族. 推广至$\R^n$, 我们以开集构成定理为基础, 利用方体覆盖以及下确界定义了$\R^n$上的勒贝格外测度, 再利用\textbf{Carath\'eodory条件}加以限制得到勒贝格测度. 勒贝格测度$m$满足以下性质:
+\begin{enumerate}
+    \item  $m(\varnothing) = 0$;
+    \item (可数可加性)若$\{E_n\}$是一列互不相交的可测集, 则
+    $$m\br{\bCup{n=1}{\infty}E_n} = \Sum{n=1}{\infty}m(E_n).$$
+\end{enumerate}
+可测集族满足以下性质:
+\begin{enumerate}
+    \item 空集和$\R^n$可测;
+    \item 若$\{E_n\}$是一列可测集, 则$\bCup{n=1}{\infty}E_n$可测;
+    \item 若$E$可测, 则$E^c$可测.
+\end{enumerate}
+由此我们得到了$\R^n$上的一种集合-代数结构: 勒贝格$\sigma$-代数. 我们可以将勒贝格测度与勒贝格$\sigma$-代数推广至一般的集合. 
+
+$m$做了哪些事? 输入一个可测集$E$, $m(E)$便返回一个值, 该值属于$[0,\infty]$ (注意$\infty$可以取到, 例如$m(\R) = \infty$). 
+于是得到元素间的对应关系$E \mapsto m(E)$. 
+\begin{exercise}
+    找出$m$的定义域与值域, 将$m$这个映射写成标准形式. 
+\end{exercise}
+设$X$是一个集合, $\calM$是$X$的一些子集构成的集族. 如果$\{E_n\}_{n=1}^\infty \subset \calM \implies \bCup{n=1}{\infty}E_n \in \calM$且$E \in \calM \implies E^c \in \calM$, 则称$\calM$为$X$上的一个$\sigma$-代数, $\calM$中的元素称为\textbf{可测集}. 
+而抽象测度正是定义在$\calM$上的一个可数可加的函数: 设$\mu: \calM \to [0, \infty]$, 如果$\mu$满足
+\begin{enumerate}
+    \item $\mu(\varnothing) = 0$;
+    \item 若$\{E_n\}$是一列互不相交的可测集, 则
+    $$\mu\br{\bCup{n=1}{\infty}E_n} = \Sum{n=1}{\infty}\mu(E_n),$$
+\end{enumerate}
+那么称$\mu$为$\calM$上的一个\textbf{测度}.
+
+不难发现, 体积和外测度实际上也是定义在某些集族上的函数:
+体积\footnote{这里直接当成日常生活中(推广至$d$维)的体积即可, 并且仅定义在方体, 矩体上}定义在方体构成的集族上, 外测度定义在所有幂集上, 测度定义在$\sigma$-代数上.
+现在我们从上节的构造过程归纳出重要步骤, 厘清如何从简单到复杂. 
+我们不妨以勒贝格测度为例列一张表格:
+\begin{center}
+    \begin{tabular}{ |c|c|c|c| } 
+    \hline
+    函数 & 对应的``图形" & 对应的集族(定义域) & 如何得到 \\ 
+    \hline
+    体积 & 方体 & 所有方体构成的集族$\calQ$  & 生活经验 \\ 
+    \hline
+    外测度 & 任一子集 & 幂集$\calP(\R^n)$ & 可数方体覆盖取下确界 \\ 
+    \hline
+    测度 & 可测集 & Lebesgue $\sigma$-代数$\calL$ & Carath\'eodory条件 \\
+    \hline
+    \end{tabular}
+\end{center}
+先从最基本的具有先验体积的图形\footnote{大家可以直接想象成方体}出发(building block), 我们手头上就有了一个定义在$\calQ$上的体积函数$\rho$, 且这个函数自然地满足有限可加性(有限多个不交的方体的体积等于各自体积之和). 接着用方体覆盖任一集合, 对这些方体体积和去下确界得到定义在$\calP(\R^n)$上的函数: 外测度$m^*$. 最后, 用某些条件去限制一个集合满足关于$m^*$的某个不等式, 从而缩小$\calP(\R^n)$的范围, 得到可测集类, 同时也是个$\sigma$-代数.\footnote{如果感到这段话难以理解, 请学习正课对应的内容}
+
+在抽象测度论中我们将会学习如何构造一个测度, 也是从简单到复杂, 分为4个步骤\footnote{此处为预告, 不需要掌握. 半代数和代数也是类似于$\sigma$-代数的一种结构}:
+\begin{center}
+    (体积, 半代数) $\rightarrow$ (预测度, 代数) $\rightarrow$ (外测度, 幂集) $\rightarrow$ (测度, $\sigma$-代数)
+\end{center}
+相信大家在学习抽象测度论时, 会感到似曾相识. 
+
+最后, 我们再了解一下外测度的公理化定义(外测度在实际应用中基本都是基本图形覆盖+下确界这一套组合, 很少出现纯种的抽象外测度). 总结一下勒贝格外测度的性质, 我们将其推广至一般的集合$X$. 
+若$\mu^*: \calP(X) \to [0, \infty]$满足
+\begin{enumerate}
+    \item $\mu^*(\varnothing) = 0$;
+    \item $A \subset B \implies \mu^*(A) \leq \mu^*(B)$;
+    \item $\mu^*\br{\bCup{n=1}{\infty}A_n} \leq \Sum{n=1}{\infty} \mu^*(A_n)$,
+\end{enumerate}
+则称$\mu^*$为$X$上的一个外测度. 
+
+\begin{exercise}
+    设$\mu^*$是$X$上的一个外测度.
+    设$B \subset X$. 定义$\mu_B: \calP(X) \to [0, \infty]$如下:
+    $$\mu_B(A) = \mu^*(A \cap B).$$
+    验证: $\mu_B$也是$X$上的一个外测度. 
+\end{exercise}
+\begin{proof}
+    显然$\mu_B(\varnothing) = 0$. 设$E \subset F$, 则
+    $E \cap B \subset F \cap B$, 所以$\mu^*(E \cap B) \leq \mu^*(F \cap B)$, 即$\mu_B(E) \leq \mu_B(F)$. 设$\{E_n\}_{n=1}^\infty$为$X$中的一列集合, 则$\mu_B\br{\bCup{n=1}{\infty}E_n} = \mu^*\br{ \br{\bCup{n=1}{\infty}E_n} \cap B}$.
+    因为$\bCup{n=1}{\infty}E_n \cap B = \bCup{n=1}{\infty}(E_n \cap B)$, 所以利用$\mu^*$已经是外测度这一条件得
+    $$\mu_B\br{\bCup{n=1}{\infty}E_n} = \mu^*\br{\bCup{n=1}{\infty}(E_n \cap B)} \leq \Sum{n=1}{\infty} \mu^*(E_n \cap B) = \Sum{n=1}{\infty} \mu_B(E_n). $$
+    \qed 
+\end{proof}
+\begin{exercise} % Stein 1-26
+    设$A \subset E \subset B$, $A,B$具有有限测度. 证明: 若$m(A) = m(B)$, 则$E$可测.
+\end{exercise}
+\begin{proof}
+    因为$m(E \setminus A) \leq m(B \setminus A) = m(B) - m(A) = 0$, 所以$E \setminus A$可测, 
+    从而$E = A \cup (E \setminus A)$可测. \qed 
+\end{proof}
+
+\subsubsection*{其他外测度限制条件}
+阅读过不止一本实分析教材的同学可能会发现, 在限制外测度的定义域时, 除了用Carath\'eodory条件, 还有别的限制方式. Stein的\textit{Real Analysis}是这样定义可测集的:
+设$E$是一个集合, 若对任意$\eps > 0$都存在一个开集$U \supset E$, 使得$m^*(U \setminus E) < \eps$, 则称$E$为(勒贝格)可测集. 这种定义方式更符合几何直觉: 如果一个开集能够``较好地"盖住集合$E$, 那么$E$就是可测的, 且定义勒贝格测度$m(E) = m^*(E)$. 从该定义出发, 我们同样能够证明可测集类的封闭性以及$m$的可数可加性, 这里以并集为例:
+\begin{example}
+    利用另一种可测集的定义, 证明: 设$\{E_n\}_{n=1}^\infty$为一列可测集, 则$\bCup{n=1}{\infty}E_n$可测.
+\end{example}
+\begin{proof}
+    首先, 对每个$n \in \N$都存在$U_n$使$m^*(U_n \setminus E_n) < 2^{-n} \eps$.
+    显然$\bCup{n=1}{\infty}U_n \supset \bCup{n=1}{\infty}E_n$, 且
+    $\bCup{n=1}{\infty}U_n \setminus \bCup{n=1}{\infty}E_n = \bCup{n=1}{\infty} (U_n \setminus E_n)$, 所以
+    $$  m^*\br{\bCup{n=1}{\infty}U_n \setminus \bCup{n=1}{\infty}E_n}
+    \leq \Sum{n=1}{\infty}m^*\br{U_n \setminus E_n} < \eps. $$
+    \qed 
+\end{proof}
+在``开集逼近"这一定义下, 大部分可测集的性质证明都是传统的$\eps$方法, 而在Carath\'eodory条件的框架下, 证明则更多的是一路等于号的代数变形. 
+
+我们现在来聊聊更深层次的区别: 
+Carath\'eodory条件是一个等式, 而且对任意集合都能用. 开集逼近条件则要求我们的原始集合上要具备一个拓扑(开集是拓扑中的元素). 当然在$\R$中这个差别体现不出来, 但当我们要在更一般的集合$X$上构造测度时, 几乎就只能采用Carath\'eodory条件, 因为它只涉及到代数运算. 我们在学习抽象测度构造方法论时, 还会再见到Carath\'eodory条件. 
+
+最后, 你一定想问: 这两种定义等价吗? 这里我们需要借助勒贝格测度的\textbf{正规性质}. 从开集逼近定义出发, 对每个$n \in \N$我们都能找到$U_n \supset E$满足$m^*(U_n \setminus E) < 1/n$, 令$U = \bCap{n=1}{\infty}U_n$, 则$m^*(U \setminus E) = 0$, 于是$E = U \setminus (U \setminus E)$具有$G_\delta \setminus$(0测集)的形式, 所以$E$可测, 自然满足Carath\'eodory条件. 反过来, 正课中我们从Carath\'eodory条件出发推得的一条正规性质($\forall \eps>0~\exists$开集$U \supset E: m^*(U \setminus E)<\eps$)正是开集逼近条件.
+
+\begin{remark}
+    为保证行文连贯, 我在讲义写正规性质与测度的极限运算之前用到了这些结果, 如读者在这里对它们感到陌生, 请调整阅读顺序. 
+\end{remark}
+
+
+
+
+\subsection{巧用集合运算检验Carath\'eodory条件}
+
+
+
+
+\section{可测集与测度的性质}
+\subsection{测度的上下连续性}
+设$E_1 \subset E_2 \subset \cdots $为一单调递增的集列, 记$E = \bigunion{n=1}{\infty}E_n$, 则
+$$m(E)=\lim_{n \to \infty}m(E_n).$$
+若使用集合列极限的记号, 上式可以写得更直观:
+$$m(E)=m\left(\bigunion{n=1}{\infty}E_n\right)=m(\Lim{n}{\infty}E_n) = \Lim{n}{\infty}m(E_n).$$
+设$F_1 \supset F_2 \supset \cdots $为一单调递减的集列且$m(F_1)<\infty$,
+记$F = \bigintersect{n=1}{\infty}F_n$, 则
+$$m(F)=\lim_{n \to \infty}m(F_n).$$
+等式也可以写成:
+$$m(F)=m\left(\bigintersect{n=1}{\infty}F_n\right)=m(\Lim{n}{\infty}F_n) = \Lim{n}{\infty}m(F_n).$$
+\begin{exercise}
+    在$\R$中试找出一列$\{F_n\}_{n=1}^\infty,$ 但$m(F_1)=\infty$, 
+    使得$m\br{\bCap{n=1}{\infty}F_n} \neq \lim_{n \to \infty}m(F_n)$.
+\end{exercise}
+
+\subsection{勒贝格可测集的正规性质}
+由于$\R^n$具备天然的拓扑结构(由欧几里得范数$\|x\|=\sqrt{x_1^2 + \cdots + x_n^2}$所引出), 我们可以用熟悉的集合(开集, 闭集, 紧集)逼近一般的勒贝格可测集. 
+设$E$是$\R^n$中的一个可测集, 则对任意$\eps>0$:
+\begin{enumerate}
+    \item 存在开集$U \supset E$使$m(U \setminus E)\leq \eps$.
+    \item 存在闭集$F \subset E$使$m(E \setminus F)\leq \eps$.
+    \item 若$m(E)<\infty$, 则存在紧集$K\subset E$使$m(E \setminus K) \leq \eps$. 
+    \item 若$m(E)<\infty$, 则存在有限多个方体$\{Q_j\}_{j=1}^N$使
+    $$m\left(E \Delta \bigunion{j=1}{N}Q_j\right) \leq \eps.$$
+\end{enumerate}
+如果将$\eps$离散化, 即对每个$n \in \N$存在开集$U_n \supset E$使$m(U_n \setminus E) \leq 1/n$, 然后取极限(相关证明参见正课), 我们可以将勒贝格可测集表达成一个博雷尔集并上或减去一个零测集的形式:
+\begin{enumerate}
+    \item $E \subset \R^n$可测当且仅当$E=G \setminus N$, 其中$G$是一个$G_\delta$集, $N$是一个零测集;
+    \item $E \subset \R^n$可测当且仅当$E=F \cup M$, 其中$F$是一个$F_\sigma$集, $M$是一个零测集. 
+\end{enumerate}
+后续我们会学习定义在可测集上的函数以及在可测集上做积分, 研究这些函数和积分的性质时我们往往会遵循从简单到复杂的顺序: 
+方体$\rightarrow$开集$\rightarrow$可数个开集的交($G_\delta$)$\rightarrow$可测集. 现在请大致在脑海中留下这个印象: “勒贝格可测集可以表达成更简单的形式”. 不必强行记忆这6条性质(但是要确保自己动手证明过一遍), 它们会在后续内容中反复出现, 等你学完实分析之后就会发现自己根本忘不掉! 
+\begin{exercise} % Stein 1-25
+    可测性的另一种等价定义: 若对任意$\eps>0$都存在闭集$F \subset E$, 使得$m^*(E \setminus F) < \eps$, 则$E$可测. 证明该定义与``开集逼近"条件等价.     
+\end{exercise}
+\begin{proof}
+    提示: 注意到$U \setminus E = U \cap E^c = E^c \cap (U^c)^c = E^c \setminus U^c$.
+\end{proof}
+\begin{exercise}
+    给定集合$E$, 设
+    $$U_n = \{x: d(x,E)<1/n\}.$$ 证明
+    \begin{enumerate}
+    \item 如果$E$是紧集, 则$m(E)=\lim_{n\to \infty}m(U_n)$.
+    \item 如果$E$闭且无界, 则结论不成立.
+    \item 如果$E$开且有界, 则结论不成立.
+    \end{enumerate}
+\end{exercise}
+\begin{proof}
+    \begin{enumerate}
+    \item 显然$U_1 \supset U_2 \supset \cdots$为一递减集列, 且因为$E$是紧集, 所以$m(U_1) < \infty$. 
+    现在只需证$E = \bCap{n=1}{\infty}\{x:d(x,E) < 1/n\}$. 设$x \in E$, 则$d(x,E)=0$. 设$x \in  \bCap{n=1}{\infty}\{x:d(x,E) < 1/n\}$, 则$d(x,E) < 1/n~\forall n \in \N$, 故$d(x,E) = 0$, 所以$x \in \cl{E} = E$. 
+    \item 
+    \end{enumerate}
+\end{proof}
+
+现在我们略微研究一下$G_\d$和$F_\sigma$集.
+\begin{exercise}
+    \begin{enumerate}
+    \item 证明闭集都是$G_\d$集, 开集都是$F_\sigma$集.
+    \item 想出一个不是$G_\d$集的$F_\sigma$集.
+    \item 想出一个既不是$G_\a$也不是$F_\sigma$的博雷尔集. 
+    \end{enumerate}
+\end{exercise}
+\begin{proof}
+    \begin{enumerate}
+    \item 设$F$是一个闭集, 令$U_n = \{x: d(x,F) < 1/n\}$, 则$U_n$是开集, 且$F = \bCap{n=1}{\infty}U_n$. 任一开集都可以写成可数个闭方体的并, 所以为$F_\sigma$集. 
+    \item 
+    \end{enumerate}
+\end{proof}
+\begin{exercise} % Stein 1.27
+    设$E_1,E_2$为$\R$中对紧集, $E_1 \subset E_2$. 令$a = m(E_1), b = m(E_2)$. 
+    证明: 对任意$c \in (a,b)$, 都存在紧集$E$满足$E_1 \subset E \subset E_2$且$m(E)=c$. 
+    (提示: 如果$E$为$[0,1]$的可测子集, 考虑$t$的函数$m(E \cap [0,t])$)
+\end{exercise}

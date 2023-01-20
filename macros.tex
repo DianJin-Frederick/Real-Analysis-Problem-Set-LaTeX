@@ -1,0 +1,144 @@
+% ============= summation, product =============
+
+
+
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\SumInf}[1]{\sum_{#1}^{\infty}}
+\newcommand{\Prod}[2]{\prod_{#1}^{#2}}
+
+\newcommand{\suminfty}[2]{\sum_{#1 = #2}^{\infty}} %inf sum
+\newcommand{\sumfin}[3]{\sum_{#1 = #2}^{#3}} %\sumfin{i}{0}{N}
+\newcommand{\integrate}[4]{\int_{#1}^{#2} #3 ~d#4}
+
+\newcommand{\oProd}[2]{\bigotimes_{#1}^{#2}} % product sigma-algebra
+
+
+% ============= set & topological operations =============
+\newcommand{\union}[2]{\cup_{#1}^{#2}}
+\newcommand{\intersect}[2]{\cap_{#1}^{#2}}
+\newcommand{\bigunion}[2]{\bigcup_{#1}^{#2}}
+\newcommand{\bigintersect}[2]{\bigcap_{#1}^{#2}}
+\newcommand{\bCup}[2]{\bigcup_{#1}^{#2}}
+\newcommand{\bCap}[2]{\bigcap_{#1}^{#2}}
+
+\newcommand{\cl}[1]{\overline{#1}} % closure of a set
+
+% ============ Greek =================
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\lam}{\lambda}
+\newcommand{\s}{\sigma}
+\newcommand{\omg}{\omega}
+\newcommand{\Omg}{\Omega}
+\newcommand{\Ga}{\Gamma}
+\newcommand{\ga}{\gamma}
+%\newcommand{\th}{\theta}
+\newcommand{\vphi}{\varphi}
+\newcommand{\phe}{\varphi}
+\newcommand{\cta}{\theta}
+
+% ============ mathbb ================
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\B}{\mathbb{B}}
+\renewcommand{\H}{\mathbb{H}}
+
+% ============ calligraphy =============
+\newcommand{\Cal}[1]{\mathcal{#1}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calJ}{\mathcal{J}}
+
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calT}{\mathcal{T}} % topology
+
+
+
+
+
+
+
+% ============= braces ==============
+\newcommand{\curlBrace}[1]{\left\{#1\right\}}
+\newcommand{\Brace}[1]{\left(#1\right)}
+\newcommand{\net}[1]{\langle #1 \rangle} % inner product
+\newcommand{\Abs}[1]{\left|#1\right|} % absolute value
+\newcommand{\Lnorm}[2]{\norm{#1}_{L^{#2}}} % L^p norm
+\renewcommand{\hat}{\widehat}
+\newcommand{\br}[1]{\left(#1\right)}
+
+% ============= colors ==============
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\cyan}[1]{\textcolor{cyan}{#1}}
+\newcommand{\NvBlue}[1]{\textcolor{NavyBlue}{#1}}
+\newcommand{\OrangeRed}[1]{\textcolor{OrangeRed}{#1}}
+\newcommand{\RedOrange}[1]{\textcolor{RedOrange}{#1}}
+
+% http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf
+
+% ============== math terminology =============
+\newcommand{\Salg}{$\sigma$-algebra} % sigma- algebra
+
+% ============== other notations ==============
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\Lim}[2]{\lim_{#1 \to #2}}
+\newcommand{\osc}{\mathrm{osc}} % oscillation
+\newcommand{\supp}{\mathrm{supp~}} % support of a function
+%\newcommand{\op}{\mathrm{op}} % operator norm subscript
+\newcommand{\sgn}{\mathrm{sgn~}}
+\newcommand{\Span}{\mathrm{span~}}
+%\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\sign}{\mathrm{sign}}
+\newcommand{\range}{\mathrm{range}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Null}{\mathrm{null~}}
+\newcommand{\ess}{\mathrm{ess}}
+
+% ============== special functions =============
+% indicator/characteristic function
+\newcommand{\Char}[1]{\chi_{#1}}
+\newcommand{\Lap}{\Delta}
+
+% ============== calculus notation ==================
+% Lebesgue integral on a set
+\newcommand{\Lint}[1]{\int_{#1}}
+
+
+
+% ============== Fourier Analysis ==============
+\newcommand{\Fourierint}[1]{\frac{1}{2\pi}\int_{-\pi}^{\pi} #1 e^{-inx}~dx}
+\newcommand{\FourierSeries}{\sum_{n=-\infty}^{\infty}a_n e^{inx}}
+\newcommand{\FourierParSum}[1]{\sum_{n=-#1}^{#1}a_n e^{inx}}
+\newcommand{\circleExp}[2]{e^{2\pi i #1 / #2}}
+% #1: step; #2: partition
+\newcommand{\intRd}{\int_{\R^d}}
+\newcommand{\intR}{\int_{\R}}
+\newcommand{\FourierBase}[1]{e^{-2\pi i #1}} % e^{2\pi i x \xi}
+\newcommand{\FourierBasePos}[1]{e^{2\pi i #1}}
+
+\newcommand{\intpi}{\int_{-\pi}^{\pi}}
+\newcommand{\intT}{\int_{\mathbb{T}}}

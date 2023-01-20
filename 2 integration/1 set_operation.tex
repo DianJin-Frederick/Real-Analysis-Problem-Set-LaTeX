@@ -1,0 +1,125 @@
+
+\section{集合列的运算}
+\subsection{逻辑联结词与集合运算}
+逻辑联结词(且, 或, 非)与集合运算(交, 并, 补)有着天然的联系. 我们先复习几个最最基本的等价结论:
+\begin{enumerate}
+    \item $x \in A \cap B \Longleftrightarrow x\in A$且$x \in B$. 
+    \item $x \in A \cup B \Longleftrightarrow x\in A$或$x \in B$.
+    \item $x \in A^c \Longleftrightarrow x \notin A$. 
+\end{enumerate}
+
+接下来, 我们回顾一下“指标”的概念. 在数学分析中, 我们学习的数列通常写成$\{a_n: n \in \N\}$, 这里的$\N$便是一个指标集(index set). 通俗地讲, 这个数列的下标都是从$\N$里抓出来的. 我们当然可以把$\N$换成其他集合, 例如正偶数集$2\N$, 则得到原数列的偶子列$\{a_n: n \in 2\N\}$. 指标集不一定可数, 
+如$\R^n$中的以$0$为球心, $r$为半径的球组成的集合族$\{B(0,r): 0<r<1\}$的指标集就是$(0,1)$. 大多数情况下, 我们可以把指标集就当成是$\R$的一个子集. 更一般地, 我们有如下定义:
+
+设$\calI$是一个指标集. 则
+\begin{enumerate}
+    \item $x\in \bigcap_{i\in \calI}A_i \iff \forall i \in \calI: x \in A_i $.
+    \item $x\in \bigcup_{i\in \calI}A_i \iff \exists i_0 \in \calI: x \in A_{i_0} $.
+\end{enumerate}
+% 加几个简单的例子
+% equicontinuous
+\begin{example}
+    证明$\bigintersect{n=1}{\infty}[0, 1+1/n)=[0,1]$.
+\end{example}
+\begin{proof}
+    设$x \in \bigintersect{n=1}{\infty}[0, 1+1/n)$, 则$\forall n \in \N: x \in [0, 1+1/n)$,
+    即$0\leq x < 1+1/n$对所有$n \in \N$都成立, 所以$0\leq x \leq 1$. 
+    反过来, 令$x \in [0,1]$, 则$0 \leq x < 1+1/n$对所有$n \in \N$都成立, 翻译成集合运算得
+    $x \in \bigintersect{n=1}{\infty}[0, 1+1/n)$.
+\end{proof}
+\begin{remark}
+    这题本质上是“an epsilon of room”的小应用.
+\end{remark}
+\begin{exercise}
+    计算$\bigunion{n=1}{\infty}[0, 1-1/n]$.
+\end{exercise}
+
+
+接下来, 我们试着用集合语言描述函数列的收敛点集:
+\begin{example}
+设$f_n: \R \to \R$是一列函数, 写出$\{f_n\}$的收敛点集.
+\end{example}
+\begin{solution}
+    记我们的目标集合(即收敛点集)为$C$. 
+    首先明晰概念: 对每个固定的$x \in \R$, $\{f_n(x): n \in \N\}$就是一个数列, 要么收敛要么发散. 如果收敛, 那就把这个$x$扔进$C$; 如果发散, 这个点就不要了. 这样把$\R$中点每个点$x$检查过一遍后, 就可得到收敛点集. 
+    因此, 我们必须使用数列收敛这一概念. 相信大家都能看出“$x$是$\{f_n\}$的一个收敛点”与“$\{f_n(x)\}$收敛”这两个命题是等价的. \\
+    为了叙述方便, 我们不妨将收敛的$\{f_n(x)\}$的极限记为$f(x)$($f$是一个定义在$C$上的函数). $f_n(x_0) \to f(x_0)$的$\eps-N$定义为
+    $$\forall \eps>0~ \exists N \in \N~ \forall n \geq N: |f_n(x_0)-f(x_0)| < \eps,$$
+    也即
+    $$\forall \eps>0~ \exists N \in \N~ \forall n \geq N:
+    x_0 \in \{x \in \R: |f_n(x)-f(x)| < \eps\}.$$
+    将逻辑联结词翻译为集合运算, 得
+    $$x_0 \in \bigcap_{\eps>0}\bigcup_{N\in \N}\bigcap_{n\geq N}\{x \in \R: |f_n(x)-f(x)| < \eps\}.$$
+    然而, 在实分析中, 我们只能处理可数并或者可数交, 
+    “$\bigcap_{\eps>0}$”在这里没有实用价值, 所以我们要使出最后一招: 离散化. $f_n(x_0) \to f(x_0)$的另一个等价表述为
+    $$\forall k\in \N~ \exists N \in \N~ \forall n \geq N: |f_n(x_0)-f(x_0)| < \frac{1}{k},$$
+    这样就有
+    $$x_0 \in \bigcap_{k=1}^\infty \bigcup_{N=1}^\infty \bigcap_{n=N}^\infty 
+    \left\{x \in \R: |f_n(x)-f(x)| < \frac{1}{k}\right\} := C.$$
+    最后检验一下: 若$x \in C$, 则$\forall \eps>0~ \exists N \in \N~ \forall n \geq N: |f_n(x)-f(x)| < \frac{1}{k}$, 
+    即$f_n(x) \to f(x)$. 
+    若$x$是$\{f_n\}$的收敛点, 则显然有$x \in C$. 因此, $\{f_n\}$的收敛点集为
+    $$ C=\bigcap_{k=1}^\infty \bigcup_{N=1}^\infty \bigcap_{n=N}^\infty 
+    \left\{x \in \R: |f_n(x)-f(x)| < \frac{1}{k}\right\}. $$
+\end{solution}
+\begin{remark}
+    “离散化”这一方法来源于数列收敛性的一个等价描述: 若$a_n \to a (n \to \infty)$, 则
+    对每个$k \in \N$都存在一个足够大的$N_k$(依赖于$k$)使得当$n>N_k$时, $|a_n-a|<1/k$.
+\end{remark}
+\begin{exercise}
+    请分别沿着两条线索写出$\{f_n: n \in \N\}$的发散点集(记为$D$):
+    \begin{enumerate}
+    \item $\{f_n(x): n \in \N\}$要么发散, 要么收敛, 没有第三种情况.
+    \item “$\forall \eps>0~ \exists N \in \N~ \forall n \geq N: |f_n(x_0)-f(x_0)| < \eps$”的否命题是什么?
+    \end{enumerate}
+\end{exercise}
+
+\subsection{上, 下极限集}
+\subsubsection{标准定义}
+设$\{A_n: n \in \N\}$是一列集合, 定义
+\begin{enumerate}
+    \item $\{A_n: n \in \N\}$的上极限集为
+    $$\limsup_{n\to \infty}A_n = \bigintersect{n=1}{\infty}\bigunion{k=n}{\infty}A_k;$$
+    \item $\{A_n: n \in \N\}$的下极限集为
+    $$\liminf_{n\to \infty}A_n = \bigunion{n=1}{\infty}\bigintersect{k=n}{\infty}A_k.$$
+\end{enumerate}
+\begin{remark}
+    有时可省略“$n\to \infty$”, 直接写成$\limsup A_n, \liminf A_n$.
+\end{remark}
+我们同样可以将集合运算翻译成逻辑联结词, 来对这两种集合有个直观认识. 
+若$x \in \bigintersect{n=1}{\infty}\bigunion{k=n}{\infty}A_k$, 从外到内剥开, 先把$\bigunion{k=n}{\infty}A_k$看作一个整体, 有$\forall n \in \N: x \in \bigunion{k=n}{\infty}A_k$. 再翻译后半部分, 得$$\forall n \in \N~\exists k \geq n: x \in A_k.$$
+也就是说: 对$n=1$, 可以找到下标$k_1$使$x \in A_{k_1}$, 对$n=2$, 可以找到下标$k_2$使$x \in A_{k_2}$,
+对$n=3$, 可以找到下标$k_3$使$x \in A_{k_3}$, ...... \\
+现令$x \in \liminf_{n\to \infty}A_n = \bigunion{n=1}{\infty}\bigintersect{k=n}{\infty}A_k$, 则
+存在正整数$n_0$使得$x \in A_k$对所有$k\geq n_0$都成立. 也即从某项$n_0$开始, $x \in \bigintersect{k=n_0}{\infty}A_k$. 最后, 我们用下极限集描述$\{f_n(x): n \in \N\}$的收敛性:
+$f_n(x_0) \to f(x_0) (n \to \infty)$ 当且仅当对每个$\eps>0$, 
+$x_0 \in \liminf_{n\to \infty}\{x \in \R: |f_n(x)-f(x)| < \eps\}$.
+\begin{exercise}
+    用上极限集描述$\{f_n:n \in \N\}$的发散点集.
+\end{exercise}
+
+\subsubsection{口语化定义}
+不少书籍会提到上下极限集的另一种等价表述(甚至是直接用作定义). 由于该表述十分拗口, 必须给出英文原文.
+\begin{example}
+    验证:
+    \begin{align*}
+    &\limsup E_n = \{x: x\in E_n \mathrm{~for~infinitely~many~}n\}. \\
+    &\liminf E_n = \{x: x\in E_n \mathrm{~for~all~but~finitely~many~}n\}. \\
+    \end{align*}
+\end{example}
+\begin{proof}
+    先学一点语法: “but”的作用相当于集合的差运算, “for all but”的意思是某个命题对除去but后面的部分, 其余部分都成立. 
+    \begin{enumerate}
+    \item 根据上节内容可以很快得出$\limsup E_n \subset \{x: x\in E_n \mathrm{~for~infinitely~many~}n\}$. 先回顾实数中正无穷的定义: 如果$y\geq N$对每个正整数$N$都成立, 那么$y=\infty$. 若$x$属于无穷多个$E_n$, 则对每个$n \in \N$, 都存在$k \geq n$使$x \in E_k$(否则会怎样?). 所以$\{x: x\in E_n \mathrm{~for~infinitely~many~}n\} \subset \limsup E_n$. 
+    \item 根据上节内容可得.
+    \end{enumerate}
+\end{proof}
+\begin{remark}
+    “$x \in E_n$对除有限个之外的$n$都成立”能够推出“$x$属于无穷多个$E_n$”, 但是反之不成立(间隔着取$n$). 从这点我们可得包含关系:
+    $$ \liminf E_n \subset \limsup E_n, $$
+    正好和数列上下极限的天然不等式
+    $\liminf a_n \leq \limsup a_n$ 对应上了. 
+    
+    在概率论中, 上极限集也被记作
+    $$\limsup E_n = \{x: x\in E_n \mathrm{~infinitely~often}\}=\{x: x\in E_n \mathrm{~i.o.}\}.$$
+\end{remark}
