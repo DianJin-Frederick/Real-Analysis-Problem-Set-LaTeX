@@ -21,9 +21,8 @@
 ## 参考资料
 部分习题取自各大实分析经典教材, 包括但不限于Stein的实分析, Folland的实分析, 周民强的实变函数论. 
 
-部分习题取自UW-Madison的分析学博士资格考试. 我参加了2022年暑假的备考强化课程, 由Jacob Denson主讲, 讲义见他的个人主页 [Jacob Denson](https://docs.google.com/viewer?url=https://github.com/jdjake/Notes/raw/master/Math/Analysis/2021_SEP.pdf). 该讲义是部分往年资格考试题的解答, 质量极高. 
+部分习题取自UW-Madison的分析学博士资格考试. 我参加了2022年暑假的备考强化课程, 由Jacob Denson主讲, 讲义见他的个人主页 [Jacob Denson](https://docs.google.com/viewer?url=https://github.com/jdjake/Notes/raw/master/Math/Analysis/2021_SEP.pdf). 该讲义是部分往年资格考试题的解答, 质量极高. 完整的资格考试试卷见[Qualifying Exams](https://www.library.wisc.edu/amp/services/course-reserves-exams/).
 
-完整的资格考试试卷见[Qualifying Exams](https://www.library.wisc.edu/amp/services/course-reserves-exams/).
 部分习题取自UW-Madison 2022 Fall的研究生实分析课程(Math 721)的作业题, 教授为Andreas Seeger. 
 
 # 模板: ElegantBook: An Elegant LaTeX Template for Books
