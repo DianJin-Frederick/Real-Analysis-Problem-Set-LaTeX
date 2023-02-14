@@ -1,0 +1,119 @@
+\section{从博雷尔测度到勒贝格测度}
+我们之前做过的一道例题 \ref{Caratheodory_thm} 实际上就是抽象测度论中的Carath\'eodory定理:
+\begin{theorem}[Carath\'eodory]
+    设$X$是
+\end{theorem}
+
+
+
+
+\subsection{From Borel to Lebesgue: Two Approaches of Completion}
+By Carath\'eodory's theorem, we could get a complete $\sigma$-algebra containing $\calB_\R$ and a complete measure $\cl{\mu}_F$. Some questions raise:
+\begin{itemize}
+    \item What do we call this complete $\sigma$-algebra?
+    \item Is $\cl{\mu}_F$ the completion of $\mu_F$?
+    \item Is $\calB_\R$ strictly contained in this complete $\sigma$-algebra?
+\end{itemize}
+\begin{definition}[Lebesgue $\sigma$-algebra]
+    The completion of $\calB_\R$ is called the Lebesgue $\sigma$-algebra, denoted $\calL$. 
+\end{definition}
+In Real Analysis I, we derived the notion of Lebesgue measurability in a purely geometric way and verified that the family of Lebesgue measurable sets is a $\sigma$-algebra. 
+Here we obtain the same concept through another approach. 
+To answer the third question, we need measurable functions; to answer the second question, we have two approaches: by studying regularity properties of Lebesgue measurable sets and through a measure-theoretic way. 
+The first method has wide applications in the future. 
+\subsubsection*{Topological approach: regularity}
+In Real Analysis I, we have seen that Lebesgue measurable sets differ only by a set of measure $0$ with some Borel sets. This is called the \textbf{regularity properties} of Lebesgue measurable sets:
+\begin{proposition}[regularity properties]
+    Let $E \subset \R$ be a Lebesgue measurable set. 
+    \begin{enumerate}
+    \item For each $\eps>0$ there is an open set $U \supset E$ with $\mu(U \setminus E) < \eps$, and there is a closed set $F \subset E$ with $\mu(E \setminus F) < \eps$. 
+    \item $E = A \setminus N$, where $A$ is a $G_\delta$ set and $m(N)=0$. 
+    \item $E = B \cup M$, where $B$ is an $F_\sigma$ set and $m(M) = 0$. 
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    See Real Analysis I. 
+\end{proof}
+
+
+
+\subsubsection*{Measure-theoretic approach}
+We can also derive the Lebesgue $\sigma$-algebra via a more abstract way. 
+
+\begin{exercise}\label{ex1-22}
+    Let $\mathcal{A} \subset \mathcal{P}(X)$ be an algebra, $\mathcal{A}_\sigma$ the collection of countable unions of sets in $\mathcal{A}$, and $\mathcal{A}_{\sigma \delta}$ the collection of countable intersections of sets in $\mathcal{A}_\sigma$. Let $\mu_0$ be a premeasure on $\mathcal{A}$ and $\mu^*$ the induced outer measure.
+    \begin{enumerate}
+    \item For any $E \subset X$ and $\epsilon>0$ there exists $A \in \mathcal{A}_\sigma$ with $E \subset A$ and $\mu^*(A) \leq$ $\mu^*(E)+\epsilon$.
+    \item If $\mu^*(E)<\infty$, then $E$ is $\mu^*$-measurable implies that there exists $B \in \mathcal{A}_{\sigma \delta}$ with $E \subset B$ and $\mu^*(B \backslash E)=0$.
+    \item If $\mu_0$ is $\sigma$-finite, the restriction $\mu^*(E)<\infty$ in (b) is superfluous. 
+    \end{enumerate}
+\end{exercise}
+\begin{proof}
+    By the definition of an outer measure, there exists $Q_n \in \calA$ with $E \subset \bigunion{n=1}{\infty}Q_n$ such that 
+    $$\mu^*\Brace{\bigunion{n=1}{\infty}Q_n} \leq \mu^*(E) + \eps, $$
+    set $A = \bigunion{n=1}{\infty}Q_n$ completes part (1). 
+
+    For each $n \in \N$ there exists an $A_n \in \calA_\sigma \subset \sigma(\calA)$ such that 
+    $\mu^*(A_n) \leq \mu^*(E) + 1/n$,
+    then 
+    $$\mu^*\Brace{\bigintersect{n=1}{\infty}A_n}
+    = \lim_{n \to \infty}\mu^*(A_n) \leq \mu^*(E).$$
+    The reverse inequality is obvious. Set $B = \bigintersect{n=1}{\infty}A_n$ and thus $\mu^*(B \setminus E) = 0$. 
+    If $\mu_0$ is $\sigma$-finite, then $X = \bigunion{n=1}{\infty}X_n$ with $\mu^*(X_n) < \infty$, so we can write 
+    $E = \bigunion{n=1}{\infty}X_n \cap E$, where $E_n = X_n \cap E$. For each $E_n$ we have $B_n \supset E$ with $\mu^*(B_n \setminus E_n) = 0$, hence 
+    $$\mu^*\Brace{\bigunion{n=1}{\infty}B_n \setminus \bigunion{n=1}{\infty}E_n} = 
+    \mu^*\Brace{\bigunion{n=1}{\infty}(B_n \setminus E_n)} = 0.$$
+\end{proof}
+
+\begin{exercise}
+    Let $(X, \mathcal{M}, \mu)$ be a measure space, $\mu^*$ the outer measure induced by $\mu$, $\mathcal{M}^*$ the $\sigma$-algebra of $\mu^*$-measurable sets, and $\bar{\mu}=\mu^* \mid \mathcal{M}^*$.
+    If $\mu$ is $\sigma$-finite, then $\bar{\mu}$ is the completion of $\mu$.
+\end{exercise}
+\begin{proof}
+    Let $E \in \calM^*$, then there exists $B \in \sigma(\calA)$ with $\mu^*(B \setminus E) = 0$, so $E = B \cup (B \setminus E)$
+\end{proof}
+
+\begin{definition}
+    Let $F: \R \to \R$ be any increasing and right continuous function. We call $\cl{\mu}_F$ the Lebesgue-Stieltjes measure asscoiated to $F$, and usually denote this complete measure also by $\mu_F$. 
+\end{definition}
+
+
+\subsection{Junction: Carath\'eodory and Lebesgue}
+In Real Analysis I, we derive Lebesgue measure by restricting the outer measure to a smaller family of sets by defining $E$ to be Lebesgue measurable if 
+$$\text{for every }\eps>0 \text{ there exists an open set }\calO \supset E \text{ with }m^*(\calO \setminus E) < \eps.$$
+Then we showed that under this condition, the family of Lebesgue measurable sets forms a $\sigma$-algebra. 
+
+In Real Analysis III we use the Carath\'eodory-style approach to obtain the Lebesgue $\sigma$-algebra by declaring $E$ is Lebesgue measurable if 
+$$m^*(A) = m^*(A \cap E) + m^*(A \cap E^c) \quad \forall A \subset \R, $$
+which is elegant and easy to manipulate. 
+
+Now we show that the above two conditions are equivalent. 
+First we assume $E$ satisfies the Carath\'eodory condition ($E \in \calM_\mu$) and derive the first regularity property. 
+We begin by a lemma modifying h-intervals to open intervals. 
+\begin{lemma}
+    Let $\mu$ be a fixed Lebesgue-Stieltjes measure with domain $\calM_\mu$. 
+    For any $E \in \calM_\mu$, 
+    $$\mu(E) = \inf \curlBrace{\Sum{j=1}{\infty}
+      \mu((a_j, b_j)): E \subset \bigunion{j=1}{\infty}(a_j,b_j)}. $$
+\end{lemma}
+\begin{proof}
+    Let us call the quantity on the right $\nu(E)$. Suppose $E \subset \bigcup_1^{\infty}(a_j, b_j)$. Each $\left(a_j, b_j\right)$ is a countable disjoint union of h-intervals $I_j^k(k=1,2, \ldots)$; specifically, $I_j^k=\(c_j^k, c_j^{k+1}]$ where $\left\{c_j\right\}$ is any sequence such that $c_j^1=a_j$ and $c_j^k$ increases to $b_j$ as $k \rightarrow \infty$. Thus $E \subset \bigcup_{j, k=1}^{\infty} I_j^k$, so
+    $$
+    \sum_1^{\infty} \mu\left(\left(a_j, b_j\right)\right)=\sum_{j, k=1}^{\infty} \mu(I_j^k) \geq \mu(E),
+    $$
+    and hence $\nu(E) \geq \mu(E)$. On the other hand, given $\epsilon>0$ there exists $\left\{\left(a_j, b_j\right]\right\}_1^{\infty}$ with $E \subset \bigcup_1^{\infty}\left(a_j, b_j\right]$ and $\sum_1^{\infty} \mu\left(\left(a_j, b_j\right]\right) \leq \mu(E)+\epsilon$, and for each $j$ there exists $\delta_j>0$ such that $F\left(b_j+\delta_j\right)-F\left(b_j\right)<\epsilon 2^{-j}$. Then $E \subset \bigcup_1^{\infty}\left(a_j, b_j+\delta_j\right)$ and
+    $$
+    \sum_1^{\infty} \mu\left(\left(a_j, b_j+\delta_j\right)\right) \leq \sum_1^{\infty} \mu\left(\left(a_j, b_j\right]\right)+\epsilon \leq \mu(E)+2 \epsilon,
+    $$
+    so that $\nu(E) \leq \mu(E)$. \qed
+\end{proof}
+\begin{theorem}
+    Let $\mu$ be a fixed Lebesgue-Stieltjes measure with domain $\calM_\mu$. 
+    If $E \in \calM_\mu$, then 
+    $$\mu(E) = \inf \{\mu(U): U \supset E, U \text{ is open}\}.$$
+\end{theorem}
+\begin{proof}
+    For any $\epsilon>0$ there exist intervals $\left(a_j, b_j\right)$ such that $E \subset \bigcup_1^{\infty}\left(a_j, b_j\right)$ and $\mu(E) \leq \sum_1^{\infty} \mu\left(\left(a_j, b_j\right)\right)+\epsilon$. If $U=\bigcup_1^{\infty}\left(a_j, b_j\right)$ then $U$ is open, $U \supset E$, and $\mu(U) \leq \mu(E)+\epsilon$. On the other hand, $\mu(U) \geq \mu(E)$ whenever $U \supset E$, so the first equality is valid.  \qed
+\end{proof}
+The Lebesgue measure is a special case of Lebesgue-Stieltjes measure with $F(x) = x$, so we can apply the above results. 
+Conversely, suppose that $E \subset X$ and $\text{for every }\eps>0 \text{ there exists an open set }U \supset E \text{ with }m^*(U \setminus E) < \eps.$ Then by a limiting argument we can find a $G_\d$ set $G$ with $E = G \setminus N$ and $m(N)=0$, thus $E = G \cup N \in \calM_\mu$. The proof is complete. 

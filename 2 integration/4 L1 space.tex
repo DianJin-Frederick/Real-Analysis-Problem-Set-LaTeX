@@ -1,19 +1,19 @@
 \section{$L^1$函数空间}\label{L1_space}
-\subsection{从空间视角看积分}
+%\subsection{从空间视角看积分}
 在学习数学分析/高等数学/微积分时, 我们花了很大工夫练习计算各种积分. 我依然清晰地记着被三角函数, 有理函数, 部分分式所支配的恐惧. 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.4]{image/integrate_meme.png}
     %\caption{Caption}
 \end{figure}
-在实分析I这里, 我们终于不(怎么)要计算啦! 掌握了Lebesgue积分的定义与基本性质之后, 我们将从``空间"的视角俯瞰Lebesgue可积函数构成的集合. 
-什么是``空间"? 我不给出精确的定义\footnote{大家可以尝试搜索, 看看能不能找到一个统一的数学定义}, 
+在实分析I这里, 我们终于不(怎么)要计算啦! 掌握了勒贝格积分的定义与基本性质之后, 我们将从``空间"的视角俯瞰勒贝格可积函数构成的集合. 
+什么是``空间"? 我不给出精确的定义\footnote{这个名词本身就很笼统}, 
 只给出一些具体语境, 相信大家会有自己的理解.
 \begin{enumerate}
     \item 称集合$V$为向量\textbf{空间}若$V$上定义了两种运算: 加法与数乘, 且它们满足众所周知的8条性质. 
     \item 称集合$X$为度量\textbf{空间}(metric space)若$X$配备了一个度量$d$. 记作$(X, d)$.
     \item 称集合$X$为赋范\textbf{空间}(normed space)若$X$配备了一个范数$\norm{\cdot}$.
-    \item 称集合$X$为拓扑\textbf{空间}(topological space)若$X$配备了一个拓扑$\T$. 记作$(X, \T)$.
+    \item 称集合$X$为拓扑\textbf{空间}(topological space)若$X$配备了一个拓扑$\calT$. 记作$(X, \calT)$.
 \end{enumerate}
 \begin{exercise}
     再想出一个``空间"的例子.
@@ -22,10 +22,10 @@
 函数列的收敛问题在分析学的历史上也算是一大热点. 
 在数学分析中我们遇到过两种收敛性:
 \begin{enumerate}
-    \item 逐点收敛, 即$f_n(x) \to f(x)$对每个$x$都成立. 对给定的$x$, $\{f_n(x):n \in \N\}$就是个数列. 
-    \item 一致收敛, 即$\lim_{n \to \infty}f_n(x)=f(x)$对$x$一致成立. 
+    \item 逐点收敛, 即$f_n(x) \to f(x)$对每个$x$都成立. 对给定的$x$, $\{f_n(x):n \in \N\}$就是个数列, 并没有什么新内容.
+    \item 一致收敛, 即$\lim_{n \to \infty}f_n(x)=f(x)$对$x$一致成立, 这个要比逐点收敛复杂得多.
 \end{enumerate}
-上述收敛性实质上都是依$\R$中的绝对值度量收敛: 一列函数$f_n$在每个点的值越来越``接近"$f$在每个对应点的值.
+逐点收敛实质上是依$\R$中的绝对值度量收敛: 一列函数$f_n$在每个点的值越来越``接近"$f$在每个对应点的值, 一致收敛实质上是依连续函数空间上的上确界范数收敛, 该范数用以衡量两个连续函数间的``距离".
 在研究极限与积分运算交换次序时, 我们隐约感觉到可以用积分来衡量两个函数之间的距离. 单调收敛定理的结论为
 $$\int f_n(x)dx \to \int f(x)dx \quad (n \to \infty),$$
 移项得
@@ -49,8 +49,9 @@ $$\norm{f-g} = d(f, g), \quad \norm{f} = \int |f(x)|dx. $$
     \item 完备性: 若$\{f_n:n \in \N\}$是$L^1$中的Cauchy列, 则$f_n$在$L^1$中收敛至一个$L^1$函数$f$. 
     \item $L^1$连续性:
     $$\int |f(x+h)-f(x)|dx \to 0 \quad (h \to 0), $$
-    用新型记号来写就是\footnote{$\tau_h$为平移映射, $\tau_h: \R^d \to \R^d$, $\tau_h(x) = x+h$. 则$(f \circ \tau_h)(x) = f(\tau_h(x)) = f(x+h)$. 有的书会定义成$\tau_h(x)=x-h$, 请以实际教材为准.}
-    $$\norm{f \circ \tau_h - f}_{L^1} \to 0 \quad (h \to 0).$$
+    用新型记号来写就是\footnote{有的书会定义成$\tau_h(x)=x-h$, 请以实际教材为准.}
+    $$\norm{f \circ \tau_h - f}_{L^1} \to 0 \quad (h \to 0),$$
+    其中$\tau_h$为平移映射, $\tau_h: \R^d \to \R^d$, $\tau_h(x) = x+h$. \\
     若定义$$F(h)=\int |f(x+h)-f(x)|dx,$$
     则有$F(h) \to 0~(h \to 0)$. 
 \end{enumerate}
@@ -102,8 +103,8 @@ $\calR$就没有这么好的性质.
 \end{proof}
 
 
-\section{换序保障: Fubini-Tonelli定理}
-如果要评选出实变函数中最常用的两个定理, 那我会毫不犹豫地选出“控制收敛定理”和“Fubini定理”. 
+\section{最有用的Fubini-Tonelli定理}
+如果要评选出实变函数中最常用的两个定理, 我会毫不犹豫地选出“控制收敛定理”和“Fubini定理”. 
 Fubini定理的核心是将重积分转化成累次积分, 而交换积分次序则是非常自然的推论. 
 在应用中, Tonelli定理与Fubini定理常常成对出现. 我们往往要通过交换积分次序来降低计算难度: 按照第一种次序可能根本算不出来, 按照第二种次序可能就很快算出来了. 而只有算出来了我们才知道这个函数可不可积, 所以Tonelli定理保证了我们在不知道函数可积性的情况下也能进行换序! 
 \begin{theorem}[Tonelli]
@@ -210,10 +211,12 @@ $$\Lint{\R^{d_2}} \Brace{\Lint{\R^{d_1}}f(x,y)dx}dy
 \end{itemize}
 \begin{example}\footnote{Real Analysis, Stein, exercise 2.25}
     {\everymath{\displaystyle}
-    Show that for each $\eps>0$ the function $F(\xi)=\frac{1}{(1+|\xi|^2)^\eps}$ is the Fourier transform of an $L^1$ function. \\
-    \textbf{Hint}: With $K_\delta(x)=e^{-\pi|x|^2/\delta} \delta^{-d/2}$ consider $f(x)=\int_0^\infty K_\delta(x)e^{-\pi \delta}\delta^{\eps-1} d\delta$. Use Fubini' theorem to prove $f \in L^1(\R^d)$, and 
-    $$\hat{f}(\xi) = \int_0^\infty e^{-\pi \delta |\xi|^2} e^{-\pi \delta} \delta^{\eps-1} d\delta, $$
-    and evaluate the last integral as 
+    证明对每个固定的$\eps > 0$, 关于$\zeta$的函数$F(\xi)=\frac{1}{(1+|\xi|^2)^\eps}$
+    是某个$L^1$函数的Fourier变换. \\
+    \textbf{提示}: 令$K_\delta(x)=e^{-\pi|x|^2/\delta} \delta^{-d/2}$, 考虑
+    $f(x)=\int_0^\infty K_\delta(x)e^{-\pi \delta}\delta^{\eps-1} d\delta$. 
+    应用Fubini定理证明$f \in L^1(\R^d)$, 且$$\hat{f}(\xi) = \int_0^\infty e^{-\pi \delta |\xi|^2} e^{-\pi \delta} \delta^{\eps-1} d\delta, $$
+    然后计算这个积分(用gamma函数表达), 结果应为
     $\pi^{-\eps}\Gamma(\eps)\frac{1}{(1+|\xi|^2)^\eps}$.
     }
 \end{example}
@@ -263,7 +266,7 @@ $$\Lint{\R^{d_2}} \Brace{\Lint{\R^{d_1}}f(x,y)dx}dy
 
 \subsection{积分区域的切片}
 不知大家有没有发现, 刚才几个例子的积分区域\footnote{这里的区域泛指做积分的可测集, 而非有界开集}
-都是$\R$或者更一般的$\R^d$, 所以我们在换序时不需要考虑积分区域的变化. 回忆一下我们在微积分/数学分析中是怎么计算二重积分的: 将积分区域写成所谓的``$x$型区域"或``$y$型区域", 再进行累次积分. 
+都是$\R$或者更一般的$\R^n$, 所以我们在换序时不需要考虑积分区域的变化. 回忆一下我们在微积分/数学分析中是怎么计算二重积分的: 将积分区域写成所谓的``$x$型区域"或``$y$型区域", 再进行累次积分. 
 而在Fubini定理中, 积分区域看似都是$\R^d, \R^{d_1}, \R^{d_2}$, 实则吸收于被积函数$f$中: $$\int_E f(x,y) dxdy = \intRd f(x, y) \chi_E (x,y) dxdy. $$
 做累次积分就会出现
 $$\int_{\R^{d_1}} f(x,y) \chi_E (x,y) dx, $$
@@ -310,3 +313,6 @@ $$\intR f^y(x) (\chi_E)^y(x) dx = \int_{E^y} f^y(x) dx!$$
 \begin{remark}
     在微积分中, 积分区域一般都是矩形, 三角形等肉眼可以看出切片的集合, 但在实分析中我们遇到的大多是抽象的集合, 正如上例. 强烈建议初学者严格按照``特征函数 $+$ 在整个空间上积分"的形式进行计算. 
 \end{remark}
+\begin{exercise}
+    设$f \in L^1(\R)$, 令$F(x) = \int_{-\infty}^x f(t)~dt$, 证明$F$连续.
+\end{exercise}

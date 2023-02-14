@@ -7,8 +7,8 @@
 \title{实分析习题课讲义}
 \subtitle{}
 
-\author{Maki's Lab 实分析小组}
-\institute{Maki's Lab}
+\author{kumiko $\in$ $\calM$aki's $\calL$ab 实分析小组}
+\institute{$\calM$aki's $\calL$ab}
 \date{2022 秋}
 %\version{4.3}
 %\bioinfo{自定义}{信息}
@@ -35,6 +35,8 @@
 \usepackage[dvipsnames]{xcolor}
 
 \usepackage{ulem}
+\usepackage{eso-pic}%加水印
+
 
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
 
@@ -42,7 +44,9 @@
 \definecolor{customcolor}{RGB}{32,178,170}
 \colorlet{coverlinecolor}{customcolor}
 
+
 \begin{document}
+%\watermark{60}{6}{Maki's Lab 实分析讲义}
 \input{macros.tex}
 \maketitle
 \frontmatter
@@ -53,12 +57,14 @@
 \chapter{预备知识}
     \input{0 preliminary/set_and_function.tex}
     \input{0 preliminary/analysis_technique.tex}
-    \input{0 preliminary/distance_of_sets.tex}
+    %\input{0 preliminary/distance_of_sets.tex}
     
 \chapter{勒贝格测度}
     \input{1 measure/Lebesgue_meas.tex}
+    %\input{1 measure/Cantor_set.tex}
+    %\input{1 measure/Borel_measure.tex}
     \input{1 measure/nonmeasurable_sets.tex}
-    \input{1 measure/Cantor_set.tex}
+    \input{1 measure/Borel_to_Lebesgue.tex}
     
 \chapter{可测函数与勒贝格积分}
     %\input{2 integration/1 set_operation.tex}

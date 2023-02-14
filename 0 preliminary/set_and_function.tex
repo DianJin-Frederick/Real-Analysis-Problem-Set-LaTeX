@@ -245,14 +245,15 @@ $B$的\textbf{原像集}定义为$$f^{-1}(B) = \{x \in X: f(x) \in B\},$$
     设$f: X \to Y$, $\{A_i: i \in \calI \}$为$X$中的一族子集, $\{B_j: j \in \calJ \}$为$Y$中的一族子集. 我们有如下关系式:
     \begin{enumerate}
     \item $f^{-1}\br{\bigcap_{j \in \calJ}B_j} = \bigcap_{j \in \calJ} f^{-1}(B_j), \quad 
-           f^{-1}\br{\bigcup_{i \in \calI}A_i} = \bigcup_{i \in \calI} f^{-1}(A_i)$.
-    \item $f\br{\bigcap_{j\in \calJ}B_j} \subset \bigcap_{j \in \calJ} f(B_j), \quad  
+           f^{-1}\br{\bigcup_{j \in \calJ}B_j} = \bigcup_{j \in \calJ} f^{-1}(B_i)$.
+    \item $f\br{\bigcap_{i \in \calI}A_i} \subset \bigcap_{i \in \calI} f(A_i), \quad  
            f\br{\bigcup_{i \in \calI}A_i} = \bigcup_{i \in \calI} f(A_i)$.
     \end{enumerate}
 \begin{proof}
     \begin{enumerate}
     \item 令$x \in f^{-1}(\bigcap_{j \in \calJ}B_j)$, 则$f(x) \in \bigcap_{j \in \calJ}B_j$, 则$f(x) \in B_j ~\forall j$, 所以$x \in f^{-1}(B_j)~\forall j$, 即$x \in \bigcap_{j \in \calJ}f^{-1}(B_j)$. 反过来, 令$x \in \bigcap_{j \in \calJ}f^{-1}(B_j)$, 则$x \in f^{-1}(B_j)~\forall j$, 所以$f(x) \in B_j~\forall j$, 即$f(x) \in \bigcap_{j \in \calJ}B_j$, 故$x \in f^{-1}\br{\bigcap_{j \in \calJ}B_j}.$  并运算的证明留做练习. 
-    \item 设$y \in f\br{\bigcap_{j \in \calJ}B_j}$, 则存在$x \in \bigcap_{j \in \calJ}B_j: y = f(x)$. 由$x \in B_j~\forall j$可知$f(x) \in f(B_j)~\forall j$, 从而$y = f(x) \in \bigcap_{j \in \calJ}f(B_j)$. 并运算的证明留做练习. \qed 
+    \item 设$y \in f\br{\bigcap_{i \in \calI}A_i}$, 则存在$x \in \bigcap_{i \in \calI}A_i: y = f(x)$. 由$x \in A_i~\forall i$可知$f(x) \in f(A_i)~\forall i$, 
+    从而$y = f(x) \in \bigcap_{i \in \calI}f(A_i)$. 并运算的证明留做练习. \qed 
     \end{enumerate} 
 \end{proof}
 \begin{example}

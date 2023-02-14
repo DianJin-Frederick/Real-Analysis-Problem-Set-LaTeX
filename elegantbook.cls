@@ -130,14 +130,14 @@
   \geometry{
     a4paper,
     top=25.4mm, bottom=25.4mm,
-    left=20mm, right=20mm,
+    left=35mm, right=35mm,
     headheight=2.17cm,
     headsep=4mm,
     footskip=12mm
   }
   \ifdefstring{\ELEGANT@marginpar}{margintrue}{
     \geometry{
-      marginparwidth=5cm, marginparsep=5mm,
+      marginparwidth=8cm, marginparsep=5mm,
       left=2cm,right=7cm}}{\relax}}{
     \relax}
 
