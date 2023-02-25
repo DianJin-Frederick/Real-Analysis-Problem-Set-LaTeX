@@ -1,13 +1,30 @@
 \section{从博雷尔测度到勒贝格测度}
-我们之前做过的一道例题 \ref{Caratheodory_thm} 实际上就是抽象测度论中的Carath\'eodory定理:
+我们将Carath\'eodory条件与先前做过的例题 \ref{Caratheodory_thm} 结合起来, 实际上就得到了测度论中的Carath\'eodory定理:
 \begin{theorem}[Carath\'eodory]
-    设$X$是
+    设$X$是一个集合, $\mu^*$是$X$上的一个外测度, 记$\calM^*$为所有满足Carath\'eodory条件的集合构成的集族, 则$\calM^*$是一个完备的$\sigma$-代数. 
 \end{theorem}
+\begin{exercise}
+    证明Carath\'eodory定理中的完备性. 
+\end{exercise}
+以此定理为基础, 我们得以笼统地叙述构造一个测度的全过程\footnote{更紧凑的表述详见Real Analysis, Folland, Theorem 1.14 以及实分析正课}.:
+     设$X$是一个集合. 我们从$X$上的一个初等类$\calE$以及其上的体积函数$\rho$出发, 将$\rho$延拓至$\calE$生成的代数$\calA$. 我们知道, $\calA$由$\calE$中的集合的有限无交并构成, 即
+     $$\calA = \cBr{\bigsqcup_{n=1}^{N}E_n: E_n \in \calE, N \in \N}, $$
+     所以对$A \in \calA$, 有$A = \bigsqcup_{n=1}^{N}E_n$, 其中$E_n \in \calE$. 故可令
+     $$\rho(E) = \Sum{n=1}{N}\rho(E_n). $$ 接下来, 我们在$\calA$上定义一个预测度. 设$A \in \calA$, 令$\mu_0(A) = \rho(A)$. 
+     若$A_1, A_2, \cdots \in \calA$互不相交且$\bCup{n=1}{\infty} \in \calA$, 则令
+     $$ \mu_0\br{\bCup{n=1}{\infty}A} = \Sum{n=1}{\infty}\rho(A_n). $$
+     这样, $\mu_0$便成为一个预测度, 它可以引导出外测度$\mu^*$, 即
+    $$\mu^*(E) = \inf \curlBrace{\Sum{n=1}{\infty}\mu_0(A_j): E \subset \bCup{n=1}{\infty}A_j, A_j \in \calA}. $$
+    注意到$\calA$中的每个集合都满足Carath\'eodory条件, 因此$\calA \subset \calM^*$, 故$\sigma(\calA) \subset \calM^*$. 那么, $\mu^*$限制在$\sigma(\calA)$(由$\calA$生成的$\sigma$-代数)上就是一个测度. 
+    
+\begin{remark}
+    由于初等类的结构过于简单, 在实际应用中不费吹灰之力便可跨入代数. 例如$\R$上的初等类$\{(a,b]: a<b\}$, 轻而易举地就能延拓为代数, 并且在其上定义预测度
+    $$ \mu_0\br{\bigsqcup_{n=1}^{\infty}(a_n, b_n]} = \Sum{n=1}{\infty}|(a_n, b_n]|. $$
+\end{remark}
 
+我们很快就能发现问题: Carath\'eodory定理说$\mu^*$限制在$\calM^*$上是一个(完备)测度, 而测度的构造定理说$\mu^*$限制住$\sigma(\calA)$上是一个测度. 一个是从$\calP(x)$到$\calM^*$(从上往下), 一个是从$\calA$到$\sigma(A)$(从下往上). 那$\sigma(\calA)$和$\calM^*$之间仅仅拥有简单的包含关系吗?
 
-
-
-\subsection{From Borel to Lebesgue: Two Approaches of Completion}
+\subsection{完备化的两条路径}
 By Carath\'eodory's theorem, we could get a complete $\sigma$-algebra containing $\calB_\R$ and a complete measure $\cl{\mu}_F$. Some questions raise:
 \begin{itemize}
     \item What do we call this complete $\sigma$-algebra?
@@ -21,7 +38,8 @@ In Real Analysis I, we derived the notion of Lebesgue measurability in a purely 
 Here we obtain the same concept through another approach. 
 To answer the third question, we need measurable functions; to answer the second question, we have two approaches: by studying regularity properties of Lebesgue measurable sets and through a measure-theoretic way. 
 The first method has wide applications in the future. 
-\subsubsection*{Topological approach: regularity}
+
+\subsubsection*{从拓扑的角度切入: 正则性}
 In Real Analysis I, we have seen that Lebesgue measurable sets differ only by a set of measure $0$ with some Borel sets. This is called the \textbf{regularity properties} of Lebesgue measurable sets:
 \begin{proposition}[regularity properties]
     Let $E \subset \R$ be a Lebesgue measurable set. 
@@ -37,7 +55,7 @@ In Real Analysis I, we have seen that Lebesgue measurable sets differ only by a 
 
 
 
-\subsubsection*{Measure-theoretic approach}
+\subsubsection*{从测度论的角度切入}
 We can also derive the Lebesgue $\sigma$-algebra via a more abstract way. 
 
 \begin{exercise}\label{ex1-22}

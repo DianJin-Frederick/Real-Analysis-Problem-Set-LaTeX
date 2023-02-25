@@ -464,21 +464,21 @@ $$m(F)=m\left(\bigintersect{n=1}{\infty}F_n\right)=m(\Lim{n}{\infty}F_n) = \Lim{
 \end{proof}
 
 现在我们略微研究一下$G_\d$和$F_\sigma$集.
-\begin{exercise}
+\begin{exercise}\footnote{本练习第2条需要用到Baire纲定理, 可跳过.}
     \begin{enumerate}
     \item 证明闭集都是$G_\d$集, 开集都是$F_\sigma$集.
     \item 想出一个不是$G_\d$集的$F_\sigma$集.
-    \item 想出一个既不是$G_\d$也不是$F_\sigma$的博雷尔集. 
+    %\item 想出一个既不是$G_\d$也不是$F_\sigma$的博雷尔集. 
     \end{enumerate}
 \end{exercise}
 \begin{proof}
     \begin{enumerate}
     \item 设$F$是一个闭集, 令$U_n = \{x: d(x,F) < 1/n\}$, 则$U_n$是开集, 且$F = \bCap{n=1}{\infty}U_n$. 任一开集都可以写成可数个闭方体的并, 所以为$F_\sigma$集. 
-    \item 
+    \item 我们证明有理数集$\Q$满足要求. 首先, $\Q = \bCup{n=1}{\infty}\{r_n\}$x看然是个$F_\sigma$集. 
     \end{enumerate}
 \end{proof}
 \begin{exercise} % Stein 1.27
-    设$E_1,E_2$为$\R$中对紧集, $E_1 \subset E_2$. 令$a = m(E_1), b = m(E_2)$. 
+    设$E_1,E_2$为$\R$中的紧集, $E_1 \subset E_2$. 令$a = m(E_1), b = m(E_2)$. 
     证明: 对任意$c \in (a,b)$, 都存在紧集$E$满足$E_1 \subset E \subset E_2$且$m(E)=c$. 
     (提示: 如果$E$为$[0,1]$的可测子集, 考虑$t$的函数$m(E \cap [0,t])$)
 \end{exercise}

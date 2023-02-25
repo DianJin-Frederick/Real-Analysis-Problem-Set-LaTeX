@@ -31,7 +31,7 @@
 则$\sim$给出了$[0,1]$的一个划分, 即$[0,1]$可以写成一些集合的无交并:
 $[0,1]=\bigcup_{\a \in A} \calE_a$($A$是某个指标集). 应用选择公理, 在每个$\calE_\a$中选出恰好一个$x_\a$, 令$\calN = \{x_\a: \a \in A\}$.
 
-\begin{theorem}
+\begin{theorem}\label{nonmeasurable}
     $\calN$不可测.
 \end{theorem}
 \begin{proof}
@@ -67,9 +67,21 @@ $[0,1]=\bigcup_{\a \in A} \calE_a$($A$是某个指标集). 应用选择公理, �
 \begin{exercise} % Stein ex 1-32(a)
     若$E$是$\calN$的一个可测子集, 则$m(E) = 0$. 
 \end{exercise}
+\begin{proof}
+    设$E \subset \calN$为可测集, 我们将$E$和$\calN$同步平移. 记$\Q = \{r_k\}$, 则$E + r_k \subset \calN + r_k$, 且我们知道当$k \neq m$时, $\calN + r_k \cap \calN + r_m = \varnothing$, 所以$\{E + r_k\}$互不相交, 所以
+    $$\Sum{k=1}{\infty}m(E) = \Sum{k=1}{\infty}m(E + r_k) 
+    = m\br{\bCup{k=1}{\infty}E+r_k} \leq m^*\br{\bCup{k=1}{\infty}\calN+r_k} \leq 3, $$
+    故$m(E) = 0$. \qed 
+\end{proof}
 \begin{exercise} % Stein ex 1-32(b)
-    若$G$可测且具有正测度, 则$G$包含一个不可测子集.
+    若$G$可测且具有正测度, 则$G$包含一个不可测子集. 
 \end{exercise}
+\begin{proof}
+    不可测集构造的第一步便是在区间$[0,1]$上定义等价关系, 而$[0,1]$跟$[a,b]$并没有什么区别, 所以我们在$[a,b]$上定义相同的等价关系, 也能构造出不可测集. 注意到
+    $$G = G \cap \R = G \cap \bCup{n=1}{\infty}[-n, n] \neq \varnothing,$$ 所以存在$N$, 使得$G \cap [-N, N]$非空. 现在$G \cap [-N, N]$上定义等价关系:
+    $$x \sim y \iff x-y \in \Q, $$
+    重复定理 \ref{nonmeasurable} 的证明过程即可. \qed 
+\end{proof}
 
 其实, 构造不可测集根本就不需要``测度"这个概念! 测度的标准定义出现之前, 人们首先想的是能不能``测"出\textbf{所有}集合的大小, 而且这个``测量工具"得满足平移不变性与可数可加性, 即是否存在函数$\mu: \calP(\R) \to [0,\infty]$满足
 $\mu(E+a) = \mu(E)$以及$\mu\br{\bCup{n=1}{\infty}E_n} = \Sum{n=1}{\infty}\mu(E_n)$对所有$\R$的互不相交的子集都成立. 于是我们构造了Vitali集$\calN$, 并利用这两条性质导出了矛盾, 说明这样的函数并不存在, 所以不是所有的集合都是可测的. 
