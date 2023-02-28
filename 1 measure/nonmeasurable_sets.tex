@@ -9,18 +9,30 @@
     \item $\lam A = \{\lam a: a \in A\}$.
     \end{itemize}
 \end{definition}
-
-
-\begin{example}[~(UW-Madison Qual)]
-    设$E \subset \R$可测, 且对每个有理数$r$有$E+r=E$. 证明$E$或$E^c$是零测集.
+我们在学习线性代数时只关注线性结构, 一般不会出现拓扑结构. 只要不是``虚张声势的线性代数"教材, 都不太可能出现``开集"这个词. 而$\R^d$上的勒贝格测度的正则性质依赖于该空间上的欧式拓扑, 而$\R^d$本身又是向量空间. 在泛函分析中, 大家会学习拓扑向量空间(topological vector space), 其地位相当于欧氏空间之于数学分析. 届时, $A+B, \lam A$等记号将无处不在. 
+\begin{example}
+    设$A, B \subset \R$, $m(A) = m(B) = 0$. 问: $m(A+B)$一定为$0$吗?
 \end{example}
 \begin{proof}
-    这道题得用积分的平移不变性, 所以我们现在还做不了. 放在这里只是为了让大家意识到好多看起来是纯测度的题实际上要用到勒贝格积分的性质. \qed     
+    这类问题多半要用到康托集. 令$A = B = \calC / 2$, 则显然$m(A) = m(B) = 0$. 
+    令$x \in A, y \in B$, 则有
+    \begin{align*}
+    x = \Sum{k=1}{\infty}\frac{a_k}{3^k}, y = \Sum{k=1}{\infty}\frac{b_k}{3^k}, \quad a_k, b_k \in \{0, 1\}.
+    \end{align*}
+    所以对每个$k \in \N$, $a_k + b_k \in \{0, 1, 2\}$, 所以$x+y$穷尽了$[0,1]$中的所有数, 故$m(A+B) = 1 \neq 0$. \qed 
 \end{proof}
 
-\begin{example}
-    设$X$是一个向量空间, $\mu$为$X$上的一个博雷尔测度. 证明: $\mu$具有平移不变性. 
-\end{example}
+
+%\begin{example}[~(UW-Madison Qual)]
+%    设$E \subset \R$可测, 且对每个有理数$r$有$E+r=E$. 证明$E$或$E^c$是零测集.
+%\end{example}
+%\begin{proof}
+%    这道题得用积分的平移不变性, 所以我们现在还做不了. 放在这里只是为了让大家意识到好多看起来是纯测度的题实际上要用到勒贝格积分的性质. \qed     
+%\end{proof}
+
+%\begin{example}
+    %设$X$是一个向量空间, $\mu$为$X$上的一个博雷尔测度. 证明: $\mu$具有平移不变性. 
+%\end{example}
 
 
 
