@@ -62,6 +62,13 @@
     \end{itemize}
     不要被$\infty$吓到, 逐一考察每一单独项的性质即可. 
 \end{remark}
+\begin{exercise}\footnote{Real Analysis, Stein, Exercise 1.11}
+    $[0, 1]$中的每个数$x$都有十进制展开:
+    $$ x = \Sum{k=1}{\infty}\frac{a_k}{10^k}, \quad a_k \in \{0, 1, \cdots, 9\}. $$
+    现取满足$a_k \neq 4~\forall k$的所有$x$, 记其构成的集合为$A$. 求$m(A)$. 
+\end{exercise}
+
+
 最后再总结一下康托集的性质:
 \begin{property}
     \begin{enumerate}
@@ -175,7 +182,7 @@ $F(1/3) = F(2/3) = 1/2$, 故可定义$F(x) = 1/2~\forall x \in (1/3, 2/3)$.
 \end{example}
 
 
-\subsection{广义康托集}
+\subsection{广义康托集及其应用}
 康托集的构造过程很容易推广: 改一改挖掉的区间数, 改一改挖去的区间长度,
 或者将康托集的一些性质归纳出来进行排列组合, 比如``完全不连通的紧集"等等. 我们也可以将这些集合归于类康托集. 为和正课讲义保持一致, 我们将上面这两种集合统称为``广义康托集". 
 
@@ -185,11 +192,16 @@ $F(1/3) = F(2/3) = 1/2$, 故可定义$F(x) = 1/2~\forall x \in (1/3, 2/3)$.
     \textbf{第2步}: $C_1$是两个闭区间的并. 从每个闭区间中删去相对长度\footnote{由于$\xi \in (0,1)$, 所以可以将其理解为所占单位区间的百分比. 若$I$对闭区间$[a,b]$具有相对长度$\xi$, 则$I$的长度为$(b-a)\xi$. }为$\xi$的中心区间, 余下的集合记作$C_2$. \\
     依此类推, 记$\calC_\xi = \bCap{n=1}{\infty}C_n$.
     \begin{enumerate}
-    \item 证明$m(C_\xi^c) = 1$.
-    \item 不用第一问, 证明$m^*(C_\xi) = 0$. 
+    \item 证明$m(\calC_\xi^c) = 1$.
+    \item 不用第一问, 证明$m^*(\calC_\xi) = 0$. 
     \end{enumerate}
 \end{example}
-
+\begin{proof}
+    
+\end{proof}
+\begin{example}
+    
+\end{example}
 
 
 \begin{example} % Stein ex 1-20
@@ -206,7 +218,9 @@ $F(1/3) = F(2/3) = 1/2$, 故可定义$F(x) = 1/2~\forall x \in (1/3, 2/3)$.
     $$ 0<m(A \cap I)<m(I) \quad \text{对所有区间}~I \subset [0,1]~\text{都成立}. $$
 \end{example}
 
-
+\begin{exercise}
+    构造$f:\R \to \R$, $f$将开集映成开集, 但$f$不是连续函数. 
+\end{exercise}
 
 
 

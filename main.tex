@@ -36,7 +36,7 @@
 
 \usepackage{ulem}
 \usepackage{eso-pic}%加水印
-
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
 
@@ -50,8 +50,14 @@
 \input{macros.tex}
 \maketitle
 \frontmatter
+\chapter*{前言}
+\markboth{Introduction}{Introduction}
+\input{prologue.tex}
+
+
 
 \tableofcontents
+
 
 \mainmatter
 \chapter{预备知识}
@@ -65,6 +71,8 @@
     %\input{1 measure/Borel_measure.tex}
     \input{1 measure/nonmeasurable_sets.tex}
     \input{1 measure/Borel_to_Lebesgue.tex}
+    \input{1 measure/Brunn-Minkowski.tex}
+    \input{1 measure/meas_and_transform}
     
 \chapter{可测函数与勒贝格积分}
     %\input{2 integration/1 set_operation.tex}
