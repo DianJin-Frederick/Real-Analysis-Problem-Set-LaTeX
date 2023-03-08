@@ -41,11 +41,13 @@ $$E = F \cup N, $$
 我们从测度的构造过程入手, 探究$\sigma(\calA)$与$\calM^*$的关系. 
 
 \begin{exercise}\footnote{Real Analysis, Folland, Exercise 1.22}\label{ex1-22}
-    Let $\mathcal{A} \subset \mathcal{P}(X)$ be an algebra, $\mathcal{A}_\sigma$ the collection of countable unions of sets in $\mathcal{A}$, and $\mathcal{A}_{\sigma \delta}$ the collection of countable intersections of sets in $\mathcal{A}_\sigma$. Let $\mu_0$ be a premeasure on $\mathcal{A}$ and $\mu^*$ the induced outer measure.
+    设$\calA$是$X$上的一个代数, $\calA_\sigma$为$\calA$中集合的所有可数并构成的集族, 即
+    $$\calA_\sigma = \left\{\bCup{n=1}{\infty}A_n: A_n \in \calA~\forall n \in \N \right\}.$$
+    设$A_{\sigma \d}$是由$A_\sigma$中集合的所有可数交构成的集族, 即
+    $$\calA_\sigma = \left\{\bCap{n=1}{\infty}B_n: B_n \in \calA_\sigma~\forall n \in \N \right\}.$$ 设$\mu_0$是$\calA$上的一个预测度, $\mu^*$是其引导的外测度. 证明:
     \begin{enumerate}
-    \item For any $E \subset X$ and $\epsilon>0$ there exists $A \in \mathcal{A}_\sigma$ with $E \subset A$ and $\mu^*(A) \leq$ $\mu^*(E)+\epsilon$.
-    \item If $\mu^*(E)<\infty$, then $E$ is $\mu^*$-measurable implies that there exists $B \in \mathcal{A}_{\sigma \delta}$ with $E \subset B$ and $\mu^*(B \backslash E)=0$.
-    \item If $\mu_0$ is $\sigma$-finite, the restriction $\mu^*(E)<\infty$ in (b) is superfluous. 
+        \item 对任意$E \subset X$与$\eps > 0$, 都存在$A \in \calA_\sigma$满足$E \subset A$和$\mu^*(A) \leq \mu^*(E) + \eps$. 
+        \item 如$\mu^*(E) < \infty$且$E$是$\mu^*$-可测的, 则存在$B \in \calA_{\sigma \delta}$满足$E \subset B$且$\mu^*(B \setminus E) = 0$. 
     \end{enumerate}
 \end{exercise}
 \begin{proof}
@@ -76,47 +78,6 @@ $$E = F \cup N, $$
 \begin{definition}
     Let $F: \R \to \R$ be any increasing and right continuous function. We call $\cl{\mu}_F$ the Lebesgue-Stieltjes measure asscoiated to $F$, and usually denote this complete measure also by $\mu_F$. 
 \end{definition}
-
-
-\subsection{Junction: Carath\'eodory and Lebesgue}
-In Real Analysis I, we derive Lebesgue measure by restricting the outer measure to a smaller family of sets by defining $E$ to be Lebesgue measurable if 
-$$\text{for every }\eps>0 \text{ there exists an open set }\calO \supset E \text{ with }m^*(\calO \setminus E) < \eps.$$
-Then we showed that under this condition, the family of Lebesgue measurable sets forms a $\sigma$-algebra. 
-
-In Real Analysis III we use the Carath\'eodory-style approach to obtain the Lebesgue $\sigma$-algebra by declaring $E$ is Lebesgue measurable if 
-$$m^*(A) = m^*(A \cap E) + m^*(A \cap E^c) \quad \forall A \subset \R, $$
-which is elegant and easy to manipulate. 
-
-Now we show that the above two conditions are equivalent. 
-First we assume $E$ satisfies the Carath\'eodory condition ($E \in \calM_\mu$) and derive the first regularity property. 
-We begin by a lemma modifying h-intervals to open intervals. 
-\begin{lemma}
-    Let $\mu$ be a fixed Lebesgue-Stieltjes measure with domain $\calM_\mu$. 
-    For any $E \in \calM_\mu$, 
-    $$\mu(E) = \inf \curlBrace{\Sum{j=1}{\infty}
-      \mu((a_j, b_j)): E \subset \bigunion{j=1}{\infty}(a_j,b_j)}. $$
-\end{lemma}
-\begin{proof}
-    Let us call the quantity on the right $\nu(E)$. Suppose $E \subset \bigcup_1^{\infty}(a_j, b_j)$. Each $\left(a_j, b_j\right)$ is a countable disjoint union of h-intervals $I_j^k(k=1,2, \ldots)$; specifically, $I_j^k=\(c_j^k, c_j^{k+1}]$ where $\left\{c_j\right\}$ is any sequence such that $c_j^1=a_j$ and $c_j^k$ increases to $b_j$ as $k \rightarrow \infty$. Thus $E \subset \bigcup_{j, k=1}^{\infty} I_j^k$, so
-    $$
-    \sum_1^{\infty} \mu\left(\left(a_j, b_j\right)\right)=\sum_{j, k=1}^{\infty} \mu(I_j^k) \geq \mu(E),
-    $$
-    and hence $\nu(E) \geq \mu(E)$. On the other hand, given $\epsilon>0$ there exists $\left\{\left(a_j, b_j\right]\right\}_1^{\infty}$ with $E \subset \bigcup_1^{\infty}\left(a_j, b_j\right]$ and $\sum_1^{\infty} \mu\left(\left(a_j, b_j\right]\right) \leq \mu(E)+\epsilon$, and for each $j$ there exists $\delta_j>0$ such that $F\left(b_j+\delta_j\right)-F\left(b_j\right)<\epsilon 2^{-j}$. Then $E \subset \bigcup_1^{\infty}\left(a_j, b_j+\delta_j\right)$ and
-    $$
-    \sum_1^{\infty} \mu\left(\left(a_j, b_j+\delta_j\right)\right) \leq \sum_1^{\infty} \mu\left(\left(a_j, b_j\right]\right)+\epsilon \leq \mu(E)+2 \epsilon,
-    $$
-    so that $\nu(E) \leq \mu(E)$. \qed
-\end{proof}
-\begin{theorem}
-    Let $\mu$ be a fixed Lebesgue-Stieltjes measure with domain $\calM_\mu$. 
-    If $E \in \calM_\mu$, then 
-    $$\mu(E) = \inf \{\mu(U): U \supset E, U \text{ is open}\}.$$
-\end{theorem}
-\begin{proof}
-    For any $\epsilon>0$ there exist intervals $\left(a_j, b_j\right)$ such that $E \subset \bigcup_1^{\infty}\left(a_j, b_j\right)$ and $\mu(E) \leq \sum_1^{\infty} \mu\left(\left(a_j, b_j\right)\right)+\epsilon$. If $U=\bigcup_1^{\infty}\left(a_j, b_j\right)$ then $U$ is open, $U \supset E$, and $\mu(U) \leq \mu(E)+\epsilon$. On the other hand, $\mu(U) \geq \mu(E)$ whenever $U \supset E$, so the first equality is valid.  \qed
-\end{proof}
-The Lebesgue measure is a special case of Lebesgue-Stieltjes measure with $F(x) = x$, so we can apply the above results. 
-Conversely, suppose that $E \subset X$ and $\text{for every }\eps>0 \text{ there exists an open set }U \supset E \text{ with }m^*(U \setminus E) < \eps.$ Then by a limiting argument we can find a $G_\d$ set $G$ with $E = G \setminus N$ and $m(N)=0$, thus $E = G \cup N \in \calM_\mu$. The proof is complete. 
 
 \subsection{历史回眸: Jordan容度}
 Jordan外容度和Lebesgue外测度的区别在与有限覆盖与可数覆盖. 

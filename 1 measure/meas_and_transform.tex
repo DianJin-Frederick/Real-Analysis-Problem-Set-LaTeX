@@ -1,7 +1,45 @@
 \section{概率空间入门(选读)}
 % from ergodic theory
-设$(X,\calM, \mu)$为一个测度空间. 如果$\mu(X) = 1$, 则称这个测度空间为\textbf{概率空间}. 
+设$(X,\calM, \mu)$为一个测度空间. 如果$\mu(X) = 1$, 则称这个测度空间为\textbf{概率空间}. 遵从概率论的习惯, 我们将符号改为$(\Omg, \calF, \P)$, 其中$\Omg$是一个集合, $\calF$是$\Omg$上的一个$\sigma$-代数\footnote{也称为$\sigma$-域, $\sigma$-field (虽然域和代数在代数学中是两个不同的结构, 但是概率论中$\sigma$-域和$\sigma$-代数是同义词)}, 
+$\P$是一个概率测度. $\Omg$称为\textbf{样本空间}(sample space), 该集合中的元素称为\textbf{结果}(outcome); $\calF$称为\textbf{事件空间}\footnote{也可称为事件域}(event space), 这个$\sigma$-代数中的元素(注意, 集族中的元素是集合)称为\textbf{事件}(event).
 
+现在, 我们将初等概率论中的一些例子写成标准的形式, 以熟悉概率论的语言.
+\begin{example}
+    抛掷一枚均匀硬币一次, 则正面(head)和反面(tail)的概率各为$1/2$. 
+    所有可能的结果构成的集合$\Omg = \{H, T\}$, 所有可能的事件为
+    \begin{align*}
+        &A = \text{出现正面}, \\
+        &B = \text{出现反面}, \\
+        &A \cup B = \text{出现正面或反面}
+    \end{align*}
+    则$\calF = \{A, B, A \cup B \}$满足$\sigma$-代数的定义($A \cap B$为空集, 自然在$\calF$里). $(\Omg, \calF)$上的概率测度为
+    $$\P(A) = \P(B) = 1/2, \P(A \cup B) = 1, \P(A \cap B) = \P(\varnothing) = 0. $$
+\end{example}
+\begin{example}
+    抛掷一枚均匀硬币两次, 则所有可能的结果构成的集合为
+    $\Omg = \{HH, HT, TH, TT\}$, 
+    事件空间可以取$\calP(\Omg)$, 概率测度$\P$大家心里都很清楚. 
+\end{example}
+\begin{exercise}
+    掷一枚均匀的骰子一次, 写出$(\Omg, \calF, \P)$. 
+\end{exercise}
+\begin{exercise}
+    设有一枚不均匀的硬币, 出现正面的概率为$1/3$, 出现反面的概率为$2/3$, 写出$(\Omg, \calF, \P)$. 
+\end{exercise}
+从上面的例子和练习我们可以归纳出\textbf{离散概率空间}: 
+$\Omg = \{\omg_1, \cdots, \omg_n\}$为一有限集, $\calF = \calP(\Omg)$ (为了方便, 我们取最大的$\sigma$-代数), 概率测度$\P$为
+$$ \P(\{\omg_i\}) = p_i \quad (i=1, \cdots, n), \quad 
+   \text{其中 }\Sum{i=1}{n}p_i=1.  $$
 
-
+现在我们看一个实分析中没有, 但概率论独享的概念. 
+\begin{example}
+    设$(\Omg, \calF, \P)$是一概率空间, $A, B \in \calF$. 
+    如果$\P(A \cap B) = \P(A) \P(B)$, 则称$A,B$\textbf{独立}(independent).
+    证明:
+    \begin{enumerate}
+    \item 如果$A, B$独立, 那么$A^c$和$B$, $A$和$B^c$, $A^c$和$B^c$也独立.
+    \item 若$A_1, A_2, \cdots, A_n \in \calF$独立, 则
+    $A_1^c, A_2, \cdots, A_n$也独立. 
+    \end{enumerate}
+\end{example}
 \section{遍历论入门(选读)}

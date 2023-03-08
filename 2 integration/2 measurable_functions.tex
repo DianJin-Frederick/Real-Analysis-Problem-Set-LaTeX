@@ -1,5 +1,4 @@
 \section{可测函数}
-最重要的定理: 可测函数可由简单函数逼近.
 \subsection{可测函数类的封闭性}
 设$\{f_n: n \in \N\}$是一列可测函数, 则下列函数均可测:
 \begin{enumerate}
@@ -20,8 +19,6 @@
     构造一个可测函数$f$和一个连续函数$\phi$, 使得$f \circ \phi$不可测.
     以此构造证明存在不是博雷尔集的勒贝格可测集, 因而勒贝格$\sigma$-代数真包含博雷尔$\sigma$-代数
 \end{exercise}
-
-
 
 \subsection{验证可测函数}
 \begin{example}[~(Dini导数)] % Stein ex 3.14
@@ -75,3 +72,56 @@
     设$\{f_n\}$为$[0,1]$上的一列可测函数, 并且$|f_n(x)|$几乎处处有限. 证明: 存在正实数列$\{c_n\}$满足
     $$ \frac{f_n(x)}{c_n} \to 0 \quad a.e. x. $$
 \end{exercise}
+
+\subsection{随机变量与分布函数}
+可测函数真正有趣的地方在其于概率论中的伪装: 随机变量. 
+设$(\Omg, \calF, \P)$为一概率空间, 若$X:\Omg \to \R$(博雷尔)可测, 即$X^{-1}(B) \in \calF, ~\forall B \in \calB_\R$, 那么称$X$为一个\textbf{随机变量}(random variable). 
+\begin{example}
+    要验证$X$是否可测, 其实不需要检查每个$B \in \calB_\R$, 只需检查$\calB_\R$的生成集即可. 证明: 若$X^{-1}(E) = \{\omg:X(\omg) \in E\} \in \calF$对所有$E \in \calE$成立, 且$\sigma(\calE) = \calB_\R$, 那么$X$可测. 
+\end{example}
+注意到随机变量$X$对每个博雷尔集$B$的原像$X^{-1}(B)$都属于事件空间, 也就是落在$\P$的定义域$\calF$中! 这样, 我们就可以测出$X^{-1}(B)$的概率:
+$$ P(X^{-1}(B)) = P(\{\omg \in \Omg: X(\omg) \in B\}). $$
+在推进之前, 我们先看几个例子, 熟悉一下符号. 
+\begin{example}
+    TBD
+\end{example}
+\begin{example}
+    TBD
+\end{example}
+
+真正有趣的地方来了: $P(X^{-1}(B))$的形式让人联想到复合函数$f(g(x)) = f \circ g(x)$, 那我们可以定义$P \circ X^{-1}$吗? 画个交换图先: 
+\begin{center}
+    \begin{tikzcd}
+    \calB_\R \arrow[rd, "\P \circ X^{-1}", labels=below left] \arrow[r, "X^{-1}"] 
+    & \calF \arrow[d, "\P"] \\
+    & \R
+\end{tikzcd}
+\end{center}
+现在解释一下$X^{-1}: \calB_\R \to \calF$. 我们知道, $X$是映射并不意味着$X$存在逆映射, 但是$X$的原像总是存在的, 记号为$X^{-1}(B)$, 其中$B \in \calB_\R$. 又因为$X^{-1}(B) \in \calF$, 我们可以将$X^{-1}$看作集族$\calB_\R$到$\calF$的\textbf{映射}. 容易验证, $\P \circ X^{-1}$是从$\calB_\R$到$\R$的映射, 我们记为$$\mu = \P \circ X^{-1}.$$
+更过分的事情来了: $\mu$是$\calB_\R$上的\textit{概率测度}!
+\begin{exercise}
+    证明$\mu$是一个概率测度.
+\end{exercise}
+由于$\mu$是一个有限博雷尔测度, $\mu$对应了唯一的分布函数. 概率学家和分析学家在此达成了少有的共识: 实分析中的分布函数在概率论中也叫分布函数. 
+我们定义随机变量$X$的\textbf{分布函数}(distribution function)为
+$$ F(x) = \P(X^{-1}(-\infty, x]) := \P(X \leq x). $$
+注意, $\P(X \leq x)$这种写法是概率论特有的记号, 看起来像变量$X$小于等于一个$x$(我第一次学概率论的时候还真是这么理解的), 但实际上是可测函数$X$的一个原像. 
+\begin{exercise}
+    证明分布函数$F$满足如下性质:
+    \begin{enumerate}
+    \item $F$单调递增.
+    \item $\lim_{x \to \infty}F(x) = 1, \lim_{x \to -\infty}F(x) = 0$.
+    \item $F$右连续.
+    \item $\P(X = x) = F(x) - F(x^-)$. 
+    \end{enumerate}
+\end{exercise}
+
+\begin{example}
+    若函数$F$满足
+     \begin{enumerate}
+    \item $F$单调递增,
+    \item $\lim_{x \to \infty}F(x) = 1, \lim_{x \to -\infty}F(x) = 0$,
+    \item $F$右连续,
+    \end{enumerate}
+    则$F$是某个随机变量的分布函数. 
+\end{example}

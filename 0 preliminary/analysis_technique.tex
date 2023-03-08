@@ -26,7 +26,25 @@ You want to prove some statement $S_0$ about some object $x_0$ (which could be a
     \end{enumerate}
 \end{exercise}
 在数学分析中, 大多数极限计算题都可以通过一些代数变形一步一步$a=b=c=\cdots$算出结果, 
-而在实分析中, 我们要证明的等式往往会同时集齐\textbf{上下确界, 可数求和, 极限运算, 可数交并}这几大要素, 这时就只能用``an epsilon of room"进行证明, 大家在正课``勒贝格外测度"中就会初次体验到.
+而在实分析中, 我们要证明的等式往往会同时集齐\textbf{上下确界, 可数求和, 极限运算, 可数交并}这几大要素, 这时就只能用``an epsilon of room"进行证明, 大家在正课``勒贝格外测度"中就会初次体验到. 我们先用一个有关Ces\'aro求和与Abel求和的练习热热身\footnote{本部分内容参考Fourier Analysis, Stein, 2.5}.
+
+给定一实数列$\{c_n\}$, 设其前$N$项部分和为$S_N = c_1 + \cdots + c_N$. 
+定义其该级数的前$N$项的\textbf{Ces\'aro均值(Ces\'aro和)}为
+$$ \sigma_N = \frac{S_1 + \cdots + S_N}{N}. $$
+若$\lim_{N \to \infty}\sigma_N = \sigma$, 则称级数$\sum c_n$ \textbf{Ces\'aro可和}(Ces\'aro summable)于$\sigma$. 现在定义Abel可和性: 设$0 \leq r < 1$, 令
+$$ A(r) = \Sum{k=0}{\infty} c_k r^k. $$
+如果$A(r)$收敛, 且$\lim_{r \to 1} A(r) = s$, 则称$A(r)$ \textbf{Abel可和于}$s$, 并称$A(r)$为改级数的\textbf{Abel均值}(Abel means). 
+
+\begin{example}
+    证明
+    $$ \Sum{n=1}{\infty}c_n r^n = (1-r)^2 \Sum{n=1}{\infty} n \sigma_n r^n. $$
+\end{example}
+\begin{exercise}
+    证明: 如果级数$\Sum{n=1}{\infty}c_n$ Ces\'aro可和于$\sigma$, 则该级数也Abel可和于$\sigma$.     
+\end{exercise}
+\begin{proof}
+
+\end{proof}
 
 \subsection{上下极限: 会用就行}
 接下来我们复习上下极限的应用. 上极限与下极限的相关内容可参见Ayumu的数学分析, 这里我们仅复习4个要点: 设$\{a_n\}$为一数列,
