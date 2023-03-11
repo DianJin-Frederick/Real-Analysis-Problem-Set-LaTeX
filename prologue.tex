@@ -1,4 +1,5 @@
-本习题集开放$\LaTeX$ 源代码: \\
+\section*{习题集简介}
+本习题集开放\LaTeX 源代码: \\
 \url{https://github.com/kumiko-euphonium/Real-Analysis-Problem-Set-LaTeX} \\
 习题取材自
 \begin{itemize}
@@ -7,7 +8,10 @@
         \item \textit{Princeton Lectures in Analysis}, Stein
         \item \textit{Real Analysis}, Folland
         \item 实变函数论, 周民强
-        \item Probability: Theory and Examples, Durrett
+        \item \textit{Probability: Theory and Examples}, Durrett
+        \item \textit{Classical and Multilinear Harmonic Analysis}, Camil Muscalu, Wilhelm Schlag
+        \item \textit{Classical Fourier Analysis}, Loukas Grafakos
+        \item \textit{Ergodic Theory: with a view towards Number Theory}, Manfred Einsiedler, Thomas Ward
     \end{itemize}
     \item UW-Madison的博士资格考试题(分析方向)
     \begin{itemize}
@@ -18,12 +22,45 @@
     \end{itemize}
 \end{itemize}
 
-本习题集的目的在于让大家在学习实分析时就知道实分析能用在数学以及工程的哪些方面, 而非在这一门学科内部死磕三大收敛性的互推. 真正的实分析习题课应当是整个概率论. 
+本习题集的目的在于让大家在学习实分析时就知道实分析能用在数学以及工程的哪些方面, 而非在这一门学科内部死磕三大收敛性的互推.  
 \begin{itemize}
-    \item 拆分概率论的入门知识, 分散于每章中, 从随机变量一直讲到Radon-Nikodym定理在条件期望中的应用. 
+    \item 拆分概率论的入门知识, 分散于每章中, 从随机变量一直讲到Radon-Nikodym定理在条件期望中的应用. 实际上, 概率论中的每个结论都可以用作实分析的习题. 
     \item 
     \item 
 \end{itemize}
+本习题集将永远处于更新状态. 
 
+\section*{实分析学习资源}
+先列出一点我接触过的资源, 欢迎补充. 
+\subsection*{教材}
+\begin{enumerate}
+    \item \textit{Princeton Lectures in Analysis}, Stein. 普林斯顿分析学讲义, 实分析为第3本, 深度够用, 广度极为丰富, 涉及了
+        \begin{itemize}
+        \item 几何测度论中的知识(第1章, 第3章, 第7章均有涉及): Brunn-Minkowski不等式, 等周不等式, Hausdorff测度, Besicovitch集
+        \item 傅里叶分析的知识. 实际上, 4卷普林斯顿分析学讲义就是以傅里叶分析为线索串联起来的, 实分析中涉及到了Hardy-Littlewood极大函数, 逼近单位元, 傅里叶级数的$L^2$收敛性, 傅里叶变换从$\calS$至$L^2$的延拓.
+        \item 实分析与复分析的联系: Fatou定理. 
+        \item 偏微分方程. 
+        \end{itemize}
+    Stein的实分析并不像一本结构标准的数学教材, 而是像一本数学散文, 需要读者具有较好的数学成熟度才能够补全证明中跳步骤的地方以及识别出不严谨的证明. 此外, 本书的习题质量极高, 也是本习题课讲义的主要素材来源. 
+    \item \textit{Real Analysis: Modern Techniques and Their Applications}, Folland. 非常标准的字典式实分析教材, 美国高校研究生级别实分析课程必备教材, 分析学博士资格考试必备参考. 该教材内容极其全面, 习题难度较大, 适合在学校跟着老师上课时使用, 以及查阅翻找定义定理使用. 若从未接触过实分析, 则最好不要拿本书入门. 勘误可在作者的个人主页找到: 
+    \url{http://sites.math.washington.edu/~folland/Homepage/index.html}
+    \item \textit{Real and Complex Analysis}, Rudin. 字典式实分析教材, 工具书属性弱于Folland, 但行文流畅, 一气呵成, 开局直接通过Riesz表示定理构造正则Borel测度. 拓扑含量高但友好: 所需的拓扑学背景知识均在正文中证明, 没学过拓扑也完全跟得上. 
+    \item \textit{Real and Functional Analysis}, Bogachev & Smolyanov.
+    莫斯科国立大学的课程讲义, 包含实分析与泛函分析, 第四章 ``Connections between the Integral and Derivative"尤为清晰. Springer官网可下载: \url{https://link.springer.com/book/10.1007/978-3-030-38219-3#toc}
+    \item \textit{Measure, Integration & Real Analysis}, Axler. 著名的\textit{Linear Algebra Done Right}作者写的实分析教材, 复测度那一章较为精彩. 电子书见
+    \url{https://measure.axler.net/MIRA.pdf}
+\end{enumerate}
+以上是我在录制实分析视频时参考到的, 接下来的教材我不是很熟悉, 但都是优质教材:
+\begin{enumerate}
+    \item 实变函数论, 周民强
+    \item 实变函数论与泛函分析, 夏道行
+    \item \textit{Real Analysis}, Royden
+    \item \textit{Real Analysis: Theory of Measure and Integration}, J Yeh
+\end{enumerate}
 
-本习题集将永远处于更新状态.
+\subsection*{网络资源}
+\begin{enumerate}
+    \item Folland习题解答: \url{https://math24.files.wordpress.com/2013/02/ch1-folland.pdf}, 直接在搜索引擎输入``real analysis Folland solution + 对应章节"即可. 
+    \item $\calM$aki's $\calL$ab实分析讲义: \url{https://www.maki-math.com/#/courses/74}, 视频: \url{https://space.bilibili.com/391930545/channel/collectiondetail?sid=1055062}
+    \item Measure Theory by Claudio Landim: \url{https://www.bilibili.com/video/BV1EW411K7dN?p=1}
+\end{enumerate}

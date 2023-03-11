@@ -51,41 +51,53 @@ $$E = F \cup N, $$
     \end{enumerate}
 \end{exercise}
 \begin{proof}
-    By the definition of an outer measure, there exists $Q_n \in \calA$ with $E \subset \bigunion{n=1}{\infty}Q_n$ such that 
-    $$\mu^*\Brace{\bigunion{n=1}{\infty}Q_n} \leq \mu^*(E) + \eps, $$
-    set $A = \bigunion{n=1}{\infty}Q_n$ completes part (1). 
+    根据外测度的定义, 存在$Q_n \in \calA$满足$E \subset \bigunion{n=1}{\infty}Q_n$, 使得
+    $$\mu^*\Brace{\bigunion{n=1}{\infty}Q_n} \leq \mu^*(E) + \eps. $$
+    令$A = \bigunion{n=1}{\infty}Q_n$即可证明(1). 
 
-    For each $n \in \N$ there exists an $A_n \in \calA_\sigma \subset \sigma(\calA)$ such that 
+    对每个$n \in \N$, 都存在$A_n \in \calA_\sigma \subset \sigma(\calA)$, 使得
     $\mu^*(A_n) \leq \mu^*(E) + 1/n$,
-    then 
+    则 
     $$\mu^*\Brace{\bigintersect{n=1}{\infty}A_n}
     = \lim_{n \to \infty}\mu^*(A_n) \leq \mu^*(E).$$
-    The reverse inequality is obvious. Set $B = \bigintersect{n=1}{\infty}A_n$ and thus $\mu^*(B \setminus E) = 0$. 
-    If $\mu_0$ is $\sigma$-finite, then $X = \bigunion{n=1}{\infty}X_n$ with $\mu^*(X_n) < \infty$, so we can write 
-    $E = \bigunion{n=1}{\infty}X_n \cap E$, where $E_n = X_n \cap E$. For each $E_n$ we have $B_n \supset E$ with $\mu^*(B_n \setminus E_n) = 0$, hence 
+    反方向的不等式是显然的. 令$B = \bigintersect{n=1}{\infty}A_n$, 则有$\mu^*(B \setminus E) = 0$.
+    因为$\mu_0$是$\sigma$-有限的, 我们可以把$X$写成$X = \bigunion{n=1}{\infty}X_n$, 其中$\mu^*(X_n) < \infty$, 
+    故
+    $E = \bigunion{n=1}{\infty}X_n \cap E$, 
+    其中$E_n = X_n \cap E$. 对每个$E_n$, 我们有$B_n \supset E$, 使得$\mu^*(B_n \setminus E_n) = 0$, 于是
     $$\mu^*\Brace{\bigunion{n=1}{\infty}B_n \setminus \bigunion{n=1}{\infty}E_n} = 
-    \mu^*\Brace{\bigunion{n=1}{\infty}(B_n \setminus E_n)} = 0.$$
+    \mu^*\Brace{\bigunion{n=1}{\infty}(B_n \setminus E_n)} = 0.$$ \qed 
 \end{proof}
-
 \begin{exercise}
-    Let $(X, \mathcal{M}, \mu)$ be a measure space, $\mu^*$ the outer measure induced by $\mu$, $\mathcal{M}^*$ the $\sigma$-algebra of $\mu^*$-measurable sets, and $\bar{\mu}=\mu^* \mid \mathcal{M}^*$.
-    If $\mu$ is $\sigma$-finite, then $\bar{\mu}$ is the completion of $\mu$.
+    设$(X, \mathcal{M}, \mu)$是一个测度空间, $\mu^*$是$\mu$引导的外测度, 
+    $\mathcal{M}^*$是由$\mu^*$可测集构成的$\sigma$-代数, 令$\bar{\mu}=\mu^* \mid \mathcal{M}^*$.
+    若$\mu$是$\sigma$-有限的, 则$\bar{\mu}$是$\mu$的完备化. 
 \end{exercise}
 \begin{proof}
-    Let $E \in \calM^*$, then there exists $B \in \sigma(\calA)$ with $\mu^*(B \setminus E) = 0$, so $E = B \cup (B \setminus E)$
+    设$E \in \calM^*$, 则存在$B \in \sigma(\calA)$使得$\mu^*(B \setminus E) = 0$, 所以$E = B \cup (B \setminus E)$. \qed 
 \end{proof}
 
-\begin{definition}
-    Let $F: \R \to \R$ be any increasing and right continuous function. We call $\cl{\mu}_F$ the Lebesgue-Stieltjes measure asscoiated to $F$, and usually denote this complete measure also by $\mu_F$. 
-\end{definition}
-
 \subsection{历史回眸: Jordan容度}
-Jordan外容度和Lebesgue外测度的区别在与有限覆盖与可数覆盖. 
+Jordan外容度和Lebesgue外测度的区别在于有限覆盖与可数覆盖. 
 \begin{exercise}\footnote{Real Analysis, Stein, Exercise 1.14}
     设$E \subset \R$, 定义$E$的Jordan外容度为
-    $$J^*(E) = \inf \curlBrace{\Sum{j=1}{N}|I_j|: E \subset \bCup{n=1}{N}I_j, N \in \N, I_j \text{ 为开区间}}.$$
+    $$J^*(E) = \inf \curlBrace{\Sum{n=1}{N}|I_n|: E \subset \bCup{n=1}{N}I_n, N \in \N, I_n \text{ 为开区间}}.$$
     \begin{enumerate}
     \item 证明$J^*(E) = J^*(\cl{E})$. 
     \item 找出一个可数集$E \subset [0,1]$, 使得$J^*(E) = 1, m^*(E) = 0$. 
     \end{enumerate}
 \end{exercise}
+\begin{proof}
+    \begin{enumerate}
+    \item 这是典型的an $\eps$ of room问题, 关键在于研究包含$E$的开区间族与$\cl{E}$的开区间族的长度之差. 首先观察到覆盖$\cl{E}$的开区间族一定能覆盖$E$, 所以$J^*(E) \geq J(E)$. 
+    
+    设$\bCup{n=1}{N}I_n = \bCup{n=1}{N}(a_n,b_n) \supset E$, 令
+    $$ A_n = \br{a_n-\frac{\eps}{2N}, b_n+\frac{\eps}{2N}}, $$
+    则$$ \Sum{n=1}{N}|A_n| \leq \Sum{n=1}{N}|I_n| + \eps, $$
+    所以$$J^*(\cl{E}) \leq \Sum{n=1}{N}|A_n| \leq \Sum{n=1}{N}|I_n| + \eps. $$
+    对所有覆盖$E$的开区间族$\{I_n: n=1, \cdots, N; N \in \N\}$取下确界, 得
+    $$ J^*(\cl{E}) \leq J^*(E) + \eps, $$
+    因为$\eps>0$是任意的, $J^*(\cl{E}) \leq J^*(E)$. 
+    \item 令$E = \Q$. 设$\bCup{n=1}{N}I_n \supset \Q$, 则由有理数的稠密性得$\bCup{n=1}{N}I_n = [0,1]$, 所以$J^*(E) = 1$. 
+    \end{enumerate} \qed 
+\end{proof}

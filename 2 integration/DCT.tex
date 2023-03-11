@@ -14,7 +14,7 @@ $$f(x,1), f(x,2), \cdots, f(x,n), \cdots. $$
 \begin{remark}
     Fourier变换是$L^1(\R^d)$到另一个函数空间$C_0(\R^d)$\footnote{我们在后面会说明$C_0(\R^d)$是怎么来的, 这里大家只需知道Fourier变换是从一个函数空间$L^1(\R^d)$到另一个函数空间的映射即可. 函数空间在这里理解成一些函数构成的集合即可. }
     的映射, 常常记作$\calF: L^1(\R^d) \to C_0(\R^d)$. ``$f$的Fourier变换"则是指$f$在映射$\calF$下的像: $\calF(f)$, 一般也写作$\hat{f}$. 但是光秃秃的一个$\calF(f)$提供不了任何信息(告诉不了我们这个函数的对应法则), 所以要通过表达式定义它: $\calF(f)$是一个对应关系, 它将$\xi \in \R^d$对应到
-    $\intRd f(x)e^{-2\pi ix \cdot \xi} dx$, 写成
+    $\intRd f(x)e^{-2\pi ix \cdot \xi} dx \in \R$, 写成
     $$\calF(f)(\xi) = \intRd f(x)e^{-2\pi ix \cdot \xi} dx.$$ 第一个括号一般可以省略, 就有了下面这种最常见的写法:
     $$\calF f(\xi) = \intRd f(x)e^{-2\pi ix \cdot \xi} dx.$$
 \end{remark}
@@ -110,7 +110,7 @@ $$\int_0^1 \left|\frac{f(x,t+h)-f(x,t)}{h} - \pdv{}{x}f(x,t)\right| dt < \eps.$$
       dx. $$
     设$\{h_n\}$是任一趋于$0$的数列, 令
     $$g_n(x)=\frac{f(x, t+h_n)-f(x,t)}{h_n},$$
-    则$g_n(x) \to {\pdv{f}{t}}(x,t)$. 现在需要控制住$g_n$. 由微分中值定理, 
+    则$g_n(x) \to {\pdv{f}{t}}(x,t)$. 现在需要控制住$g_n$: 由微分中值定理, 
     $$|g_n(x)|=\left|{\pdv{f}{t}}(x, t+\theta h_n)h_n \cdot \frac{1}{h_n}\right| \leq g(x) \in L^1(\R^d),$$
     所以由控制收敛定理得
     $$\int g_n(x)dx \to \int g(x)dx \quad (n \to \infty).$$
