@@ -25,6 +25,8 @@
 
 部分习题取自UW-Madison 2022 Fall的研究生实分析课程(Math 721)的作业题, 教授为Andreas Seeger. 
 
+##请勿用于盈利!
+
 # 模板: ElegantBook: An Elegant LaTeX Template for Books
 
 ElegantBook is designed for writing books, created by [Dongsheng Deng](https://ddswhu.me/) and [Liam Huang](https://liam.page/). Just enjoy it! If you have any questions, suggestions or bug reports, you can create issues or contact us at elegantlatex2e@gmail.com.
