@@ -25,7 +25,7 @@
 
 部分习题取自UW-Madison 2022 Fall的研究生实分析课程(Math 721)的作业题, 教授为Andreas Seeger. 
 
-##请勿用于盈利!
+## 请勿用于盈利!
 
 # 模板: ElegantBook: An Elegant LaTeX Template for Books
 
